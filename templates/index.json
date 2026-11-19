@@ -9,86 +9,41 @@
  */
 {
   "sections": {
-    "hero_jVaWmY": {
-      "type": "hero",
+    "slideshow": {
+      "type": "bb-slideshow",
       "blocks": {
-        "text_YLPk4p": {
-          "type": "text",
-          "name": "t:names.heading",
+        "slide_1": {
+          "type": "slide",
           "settings": {
-            "text": "<p>Browse our latest products</p>",
-            "width": "fit-content",
-            "max_width": "normal",
-            "alignment": "left",
-            "type_preset": "h2",
-            "font": "var(--font-body--family)",
-            "font_size": "1rem",
-            "line_height": "normal",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "text_color": "{{ settings.color_palette.background }}",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
+            "image": "shopify://shop_images/bb-slide-1-desktop.webp",
+            "image_mobile": "shopify://shop_images/bb-slide-1-mobile.webp",
+            "link": "shopify://collections/wee-baby",
+            "alt": "bunny_baby.home.slide_wee_baby"
+          }
         },
-        "button_H9gpTf": {
-          "type": "button",
-          "name": "t:names.button",
+        "slide_2": {
+          "type": "slide",
           "settings": {
-            "label": "Shop all",
+            "image": "shopify://shop_images/bb-slide-2-desktop.webp",
+            "image_mobile": "shopify://shop_images/bb-slide-2-mobile.webp",
             "link": "shopify://collections/all",
-            "open_in_new_tab": false,
-            "style_class": "button-custom",
-            "custom_button_background": "rgba(0, 0, 0, 0)",
-            "custom_button_text": "{{ settings.color_palette.background }}",
-            "custom_button_border": "{{ settings.color_palette.background }}",
-            "width": "fit-content",
-            "custom_width": 100,
-            "width_mobile": "fit-content",
-            "custom_width_mobile": 100
-          },
-          "blocks": {}
+            "alt": "bunny_baby.home.slide_essentials"
+          }
         }
       },
       "block_order": [
-        "text_YLPk4p",
-        "button_H9gpTf"
+        "slide_1",
+        "slide_2"
       ],
-      "name": "t:names.hero",
       "settings": {
-        "media_type_1": "image",
-        "media_type_2": "image",
-        "link": "",
-        "open_in_new_tab": false,
-        "content_direction": "column",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "space-between",
-        "vertical_alignment": "flex-end",
-        "align_baseline": true,
-        "horizontal_alignment_flex_direction_column": "center",
-        "vertical_alignment_flex_direction_column": "flex-end",
-        "gap": 24,
         "section_width": "page-width",
-        "section_height": "medium",
-        "section_height_custom": 50,
-        "toggle_overlay": true,
-        "overlay_color": "#12121266",
-        "overlay_style": "solid",
-        "gradient_direction": "to bottom",
-        "blurred_reflection": false,
-        "reflection_opacity": 75,
-        "padding-block-start": 100,
-        "padding-block-end": 72
+        "autoplay": true,
+        "speed": 5,
+        "padding_top": 16,
+        "padding_bottom": 8
       }
     },
-    "product_list_fa6P9H": {
+    "products_wee_baby": {
       "type": "product-list",
       "blocks": {
         "static-header": {
@@ -122,51 +77,8 @@
             "padding-inline-start": 0,
             "padding-inline-end": 0
           },
-          "blocks": {
-            "product_list_text_YFtzcL": {
-              "type": "_product-list-text",
-              "name": "t:names.collection_title",
-              "settings": {
-                "text": "<h3>{{ closest.collection.title }}</h3>",
-                "width": "fit-content",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "h4",
-                "font": "var(--font-body--family)",
-                "font_size": "",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "product_list_button_MWeP9V": {
-              "type": "_product-list-button",
-              "name": "t:names.product_list_button",
-              "settings": {
-                "label": "View all",
-                "open_in_new_tab": false,
-                "style_class": "button-unstyled",
-                "width": "fit-content",
-                "custom_width": 100,
-                "width_mobile": "fit-content",
-                "custom_width_mobile": 100
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "product_list_text_YFtzcL",
-            "product_list_button_MWeP9V"
-          ]
+          "blocks": {},
+          "block_order": []
         },
         "static-product-card": {
           "type": "_product-card",
@@ -256,27 +168,1370 @@
       },
       "name": "t:names.featured_collection",
       "settings": {
-        "collection": "all",
-        "layout_type": "grid",
-        "carousel_on_mobile": false,
-        "max_products": 8,
+        "collection": "wee-baby",
+        "layout_type": "carousel",
+        "carousel_on_mobile": true,
+        "max_products": 12,
         "columns": 4,
         "mobile_columns": "2",
-        "mobile_card_size": "60cqw",
-        "columns_gap": 8,
-        "rows_gap": 24,
+        "mobile_card_size": "44cqw",
+        "columns_gap": 12,
+        "rows_gap": 16,
         "icons_style": "arrow",
-        "icons_shape": "none",
+        "icons_shape": "circle",
         "section_width": "page-width",
         "horizontal_alignment": "flex-start",
-        "gap": 28,
-        "padding-block-start": 48,
-        "padding-block-end": 48
+        "gap": 0,
+        "padding-block-start": 8,
+        "padding-block-end": 24
+      }
+    },
+    "stages": {
+      "type": "bb-stages",
+      "blocks": {
+        "stage_1": {
+          "type": "stage",
+          "settings": {
+            "asset": "bb-stage-0-6.webp",
+            "label": "bunny_baby.home.stage_0_6",
+            "link": "/collections/all/age-0-6-months"
+          }
+        },
+        "stage_2": {
+          "type": "stage",
+          "settings": {
+            "asset": "bb-stage-6-12.webp",
+            "label": "bunny_baby.home.stage_6_12",
+            "link": "/collections/all/age-6-12-months"
+          }
+        },
+        "stage_3": {
+          "type": "stage",
+          "settings": {
+            "asset": "bb-stage-1-3.webp",
+            "label": "bunny_baby.home.stage_1_3",
+            "link": "/collections/all/age-12-24-months"
+          }
+        },
+        "stage_4": {
+          "type": "stage",
+          "settings": {
+            "asset": "bb-stage-mum.webp",
+            "label": "bunny_baby.home.stage_mum",
+            "link": "shopify://collections/breastfeeding-and-mum"
+          }
+        },
+        "trust_1": {
+          "type": "trust",
+          "settings": {
+            "icon": "shopify://shop_images/bb-trust-returns.webp",
+            "label": "bunny_baby.home.trust_returns"
+          }
+        },
+        "trust_2": {
+          "type": "trust",
+          "settings": {
+            "icon": "shopify://shop_images/bb-trust-delivery.webp",
+            "label": "bunny_baby.home.trust_delivery"
+          }
+        },
+        "trust_3": {
+          "type": "trust",
+          "settings": {
+            "icon": "shopify://shop_images/bb-trust-cod.webp",
+            "label": "bunny_baby.home.trust_cod"
+          }
+        },
+        "trust_4": {
+          "type": "trust",
+          "settings": {
+            "icon": "shopify://shop_images/bb-trust-original.webp",
+            "label": "bunny_baby.home.trust_original"
+          }
+        }
+      },
+      "block_order": [
+        "stage_1",
+        "stage_2",
+        "stage_3",
+        "stage_4",
+        "trust_1",
+        "trust_2",
+        "trust_3",
+        "trust_4"
+      ],
+      "settings": {
+        "heading": "bunny_baby.home.shop_by_stage",
+        "padding_top": 16,
+        "padding_bottom": 8
+      }
+    },
+    "needs": {
+      "type": "bb-needs",
+      "blocks": {
+        "need_1": {
+          "type": "need",
+          "settings": {
+            "collection": "feeding",
+            "image": "shopify://shop_images/bb-need-feeding.webp",
+            "label": "bunny_baby.home.need_feeding"
+          }
+        },
+        "need_2": {
+          "type": "need",
+          "settings": {
+            "collection": "soothers-and-teething",
+            "image": "shopify://shop_images/bb-need-pacifiers.webp",
+            "label": "bunny_baby.home.need_pacifiers"
+          }
+        },
+        "need_3": {
+          "type": "need",
+          "settings": {
+            "collection": "bath-and-skincare",
+            "image": "shopify://shop_images/bb-need-shower.webp",
+            "label": "bunny_baby.home.need_shower"
+          }
+        },
+        "need_4": {
+          "type": "need",
+          "settings": {
+            "collection": "diapers-and-wipes",
+            "image": "shopify://shop_images/bb-need-diapers.webp",
+            "label": "bunny_baby.home.need_diapers"
+          }
+        },
+        "need_5": {
+          "type": "need",
+          "settings": {
+            "collection": "breast-pumps",
+            "image": "shopify://shop_images/bb-need-breastfeeding.webp",
+            "label": "bunny_baby.home.need_breastfeeding"
+          }
+        },
+        "need_6": {
+          "type": "need",
+          "settings": {
+            "collection": "strollers-and-travel-systems",
+            "image": "shopify://shop_images/bb-need-strollers.webp",
+            "label": "bunny_baby.home.need_strollers"
+          }
+        },
+        "need_7": {
+          "type": "need",
+          "settings": {
+            "collection": "car-seats",
+            "image": "shopify://shop_images/bb-need-car-seats.webp",
+            "label": "bunny_baby.home.need_car_seats"
+          }
+        },
+        "need_8": {
+          "type": "need",
+          "settings": {
+            "collection": "cribs-and-baby-beds",
+            "image": "shopify://shop_images/bb-need-sleeping.webp",
+            "label": "bunny_baby.home.need_sleeping"
+          }
+        }
+      },
+      "block_order": [
+        "need_1",
+        "need_2",
+        "need_3",
+        "need_4",
+        "need_5",
+        "need_6",
+        "need_7",
+        "need_8"
+      ],
+      "settings": {
+        "heading": "bunny_baby.home.shop_by_need",
+        "padding_top": 16,
+        "padding_bottom": 8
+      }
+    },
+    "banner_la_frutta_plus": {
+      "type": "bb-banner",
+      "settings": {
+        "image": "shopify://shop_images/bb-banner-la-frutta-plus.webp",
+        "image_mobile": "",
+        "link": "shopify://collections/la-frutta-plus",
+        "alt": "bunny_baby.home.banner_la_frutta_plus",
+        "section_width": "page-width",
+        "padding_top": 16,
+        "padding_bottom": 8
+      }
+    },
+    "products_la_frutta_plus": {
+      "type": "product-list",
+      "blocks": {
+        "static-header": {
+          "type": "_product-list-content",
+          "name": "t:names.header",
+          "static": true,
+          "settings": {
+            "content_direction": "row",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "space-between",
+            "vertical_alignment": "flex-end",
+            "align_baseline": true,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 12,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {},
+          "block_order": []
+        },
+        "static-product-card": {
+          "type": "_product-card",
+          "name": "t:names.product_card",
+          "static": true,
+          "settings": {
+            "product_card_gap": 4,
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "product_card_gallery_677WP3": {
+              "type": "_product-card-gallery",
+              "name": "t:names.product_card_media",
+              "settings": {
+                "image_ratio": "adapt",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "product_title_YXxMTj": {
+              "type": "product-title",
+              "name": "t:names.product_title",
+              "settings": {
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "paragraph",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 4,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "price_JQzVV4": {
+              "type": "price",
+              "name": "t:names.product_price",
+              "settings": {
+                "show_sale_price_first": true,
+                "show_installments": false,
+                "show_tax_info": false,
+                "type_preset": "h6",
+                "width": "100%",
+                "alignment": "left",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "product_card_gallery_677WP3",
+            "product_title_YXxMTj",
+            "price_JQzVV4"
+          ]
+        }
+      },
+      "name": "t:names.featured_collection",
+      "settings": {
+        "collection": "la-frutta-plus",
+        "layout_type": "carousel",
+        "carousel_on_mobile": true,
+        "max_products": 12,
+        "columns": 4,
+        "mobile_columns": "2",
+        "mobile_card_size": "44cqw",
+        "columns_gap": 12,
+        "rows_gap": 16,
+        "icons_style": "arrow",
+        "icons_shape": "circle",
+        "section_width": "page-width",
+        "horizontal_alignment": "flex-start",
+        "gap": 0,
+        "padding-block-start": 8,
+        "padding-block-end": 24
+      }
+    },
+    "banner_baby_gear": {
+      "type": "bb-banner",
+      "settings": {
+        "image": "shopify://shop_images/bb-banner-baby-gear-desktop.webp",
+        "image_mobile": "shopify://shop_images/bb-banner-baby-gear-mobile.webp",
+        "link": "shopify://collections/gear-and-nursery",
+        "alt": "bunny_baby.home.banner_baby_gear",
+        "section_width": "page-width",
+        "padding_top": 16,
+        "padding_bottom": 8
+      }
+    },
+    "products_baby_gear": {
+      "type": "product-list",
+      "blocks": {
+        "static-header": {
+          "type": "_product-list-content",
+          "name": "t:names.header",
+          "static": true,
+          "settings": {
+            "content_direction": "row",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "space-between",
+            "vertical_alignment": "flex-end",
+            "align_baseline": true,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 12,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {},
+          "block_order": []
+        },
+        "static-product-card": {
+          "type": "_product-card",
+          "name": "t:names.product_card",
+          "static": true,
+          "settings": {
+            "product_card_gap": 4,
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "product_card_gallery_677WP3": {
+              "type": "_product-card-gallery",
+              "name": "t:names.product_card_media",
+              "settings": {
+                "image_ratio": "adapt",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "product_title_YXxMTj": {
+              "type": "product-title",
+              "name": "t:names.product_title",
+              "settings": {
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "paragraph",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 4,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "price_JQzVV4": {
+              "type": "price",
+              "name": "t:names.product_price",
+              "settings": {
+                "show_sale_price_first": true,
+                "show_installments": false,
+                "show_tax_info": false,
+                "type_preset": "h6",
+                "width": "100%",
+                "alignment": "left",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "product_card_gallery_677WP3",
+            "product_title_YXxMTj",
+            "price_JQzVV4"
+          ]
+        }
+      },
+      "name": "t:names.featured_collection",
+      "settings": {
+        "collection": "gear-and-nursery",
+        "layout_type": "carousel",
+        "carousel_on_mobile": true,
+        "max_products": 16,
+        "columns": 4,
+        "mobile_columns": "2",
+        "mobile_card_size": "44cqw",
+        "columns_gap": 12,
+        "rows_gap": 16,
+        "icons_style": "arrow",
+        "icons_shape": "circle",
+        "section_width": "page-width",
+        "horizontal_alignment": "flex-start",
+        "gap": 0,
+        "padding-block-start": 8,
+        "padding-block-end": 24
+      }
+    },
+    "banner_la_frutta_mum": {
+      "type": "bb-banner",
+      "settings": {
+        "image": "shopify://shop_images/bb-banner-la-frutta-mum-desktop.webp",
+        "image_mobile": "shopify://shop_images/bb-banner-la-frutta-mum-mobile.webp",
+        "link": "shopify://collections/la-frutta-mum",
+        "alt": "bunny_baby.home.banner_la_frutta_mum",
+        "section_width": "page-width",
+        "padding_top": 16,
+        "padding_bottom": 8
+      }
+    },
+    "products_la_frutta_mum": {
+      "type": "product-list",
+      "blocks": {
+        "static-header": {
+          "type": "_product-list-content",
+          "name": "t:names.header",
+          "static": true,
+          "settings": {
+            "content_direction": "row",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "space-between",
+            "vertical_alignment": "flex-end",
+            "align_baseline": true,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 12,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {},
+          "block_order": []
+        },
+        "static-product-card": {
+          "type": "_product-card",
+          "name": "t:names.product_card",
+          "static": true,
+          "settings": {
+            "product_card_gap": 4,
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "product_card_gallery_677WP3": {
+              "type": "_product-card-gallery",
+              "name": "t:names.product_card_media",
+              "settings": {
+                "image_ratio": "adapt",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "product_title_YXxMTj": {
+              "type": "product-title",
+              "name": "t:names.product_title",
+              "settings": {
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "paragraph",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 4,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "price_JQzVV4": {
+              "type": "price",
+              "name": "t:names.product_price",
+              "settings": {
+                "show_sale_price_first": true,
+                "show_installments": false,
+                "show_tax_info": false,
+                "type_preset": "h6",
+                "width": "100%",
+                "alignment": "left",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "product_card_gallery_677WP3",
+            "product_title_YXxMTj",
+            "price_JQzVV4"
+          ]
+        }
+      },
+      "name": "t:names.featured_collection",
+      "settings": {
+        "collection": "la-frutta-mum",
+        "layout_type": "carousel",
+        "carousel_on_mobile": true,
+        "max_products": 12,
+        "columns": 4,
+        "mobile_columns": "2",
+        "mobile_card_size": "44cqw",
+        "columns_gap": 12,
+        "rows_gap": 16,
+        "icons_style": "arrow",
+        "icons_shape": "circle",
+        "section_width": "page-width",
+        "horizontal_alignment": "flex-start",
+        "gap": 0,
+        "padding-block-start": 8,
+        "padding-block-end": 24
+      }
+    },
+    "banner_shower": {
+      "type": "bb-banner",
+      "settings": {
+        "image": "shopify://shop_images/bb-banner-shower-desktop.webp",
+        "image_mobile": "shopify://shop_images/bb-banner-shower-mobile.webp",
+        "link": "shopify://collections/bath-and-skincare",
+        "alt": "bunny_baby.home.banner_shower",
+        "section_width": "page-width",
+        "padding_top": 16,
+        "padding_bottom": 8
+      }
+    },
+    "products_shower": {
+      "type": "product-list",
+      "blocks": {
+        "static-header": {
+          "type": "_product-list-content",
+          "name": "t:names.header",
+          "static": true,
+          "settings": {
+            "content_direction": "row",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "space-between",
+            "vertical_alignment": "flex-end",
+            "align_baseline": true,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 12,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {},
+          "block_order": []
+        },
+        "static-product-card": {
+          "type": "_product-card",
+          "name": "t:names.product_card",
+          "static": true,
+          "settings": {
+            "product_card_gap": 4,
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "product_card_gallery_677WP3": {
+              "type": "_product-card-gallery",
+              "name": "t:names.product_card_media",
+              "settings": {
+                "image_ratio": "adapt",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "product_title_YXxMTj": {
+              "type": "product-title",
+              "name": "t:names.product_title",
+              "settings": {
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "paragraph",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 4,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "price_JQzVV4": {
+              "type": "price",
+              "name": "t:names.product_price",
+              "settings": {
+                "show_sale_price_first": true,
+                "show_installments": false,
+                "show_tax_info": false,
+                "type_preset": "h6",
+                "width": "100%",
+                "alignment": "left",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "product_card_gallery_677WP3",
+            "product_title_YXxMTj",
+            "price_JQzVV4"
+          ]
+        }
+      },
+      "name": "t:names.featured_collection",
+      "settings": {
+        "collection": "bath-and-skincare",
+        "layout_type": "carousel",
+        "carousel_on_mobile": true,
+        "max_products": 12,
+        "columns": 4,
+        "mobile_columns": "2",
+        "mobile_card_size": "44cqw",
+        "columns_gap": 12,
+        "rows_gap": 16,
+        "icons_style": "arrow",
+        "icons_shape": "circle",
+        "section_width": "page-width",
+        "horizontal_alignment": "flex-start",
+        "gap": 0,
+        "padding-block-start": 8,
+        "padding-block-end": 24
+      }
+    },
+    "brands": {
+      "type": "bb-brands",
+      "blocks": {
+        "brand_fluoro": {
+          "type": "brand",
+          "settings": {
+            "logo": "shopify://shop_images/bb-logo-fluoro.png",
+            "collection": "fluoro"
+          }
+        },
+        "brand_super_kids": {
+          "type": "brand",
+          "settings": {
+            "logo": "shopify://shop_images/bb-logo-super-kids.png",
+            "collection": "super-kids"
+          }
+        },
+        "brand_sudocrem": {
+          "type": "brand",
+          "settings": {
+            "logo": "shopify://shop_images/bb-logo-sudocrem.png",
+            "collection": "sudocrem"
+          }
+        },
+        "brand_true": {
+          "type": "brand",
+          "settings": {
+            "logo": "shopify://shop_images/bb-logo-true.png",
+            "collection": "true"
+          }
+        },
+        "brand_blankie": {
+          "type": "brand",
+          "settings": {
+            "logo": "shopify://shop_images/bb-logo-blankie.png",
+            "collection": "blankie"
+          }
+        },
+        "brand_canpol_babies": {
+          "type": "brand",
+          "settings": {
+            "logo": "shopify://shop_images/bb-logo-canpol-babies.png",
+            "collection": "canpol-babies"
+          }
+        },
+        "brand_sofico_kids": {
+          "type": "brand",
+          "settings": {
+            "logo": "shopify://shop_images/bb-logo-sofico-kids.png",
+            "collection": "sofico-kids"
+          }
+        },
+        "brand_nuk": {
+          "type": "brand",
+          "settings": {
+            "logo": "shopify://shop_images/bb-logo-nuk.png",
+            "collection": "nuk"
+          }
+        },
+        "brand_johnsons": {
+          "type": "brand",
+          "settings": {
+            "logo": "shopify://shop_images/bb-logo-johnsons.png",
+            "collection": "johnsons"
+          }
+        },
+        "brand_pampers": {
+          "type": "brand",
+          "settings": {
+            "logo": "shopify://shop_images/bb-logo-pampers.png",
+            "collection": "pampers"
+          }
+        },
+        "brand_philips_avent": {
+          "type": "brand",
+          "settings": {
+            "logo": "shopify://shop_images/bb-logo-philips-avent.png",
+            "collection": "philips-avent"
+          }
+        },
+        "brand_bebem": {
+          "type": "brand",
+          "settings": {
+            "logo": "shopify://shop_images/bb-logo-bebem.png",
+            "collection": "bebem"
+          }
+        },
+        "brand_nitolic": {
+          "type": "brand",
+          "settings": {
+            "logo": "shopify://shop_images/bb-logo-nitolic.png",
+            "collection": "nitolic"
+          }
+        },
+        "brand_passion_baby": {
+          "type": "brand",
+          "settings": {
+            "logo": "shopify://shop_images/bb-logo-passion-baby.png",
+            "collection": "passion-baby"
+          }
+        },
+        "brand_sanosan": {
+          "type": "brand",
+          "settings": {
+            "logo": "shopify://shop_images/bb-logo-sanosan.png",
+            "collection": "sanosan"
+          }
+        },
+        "brand_farlin": {
+          "type": "brand",
+          "settings": {
+            "logo": "shopify://shop_images/bb-logo-farlin.png",
+            "collection": "farlin"
+          }
+        },
+        "brand_dry_go": {
+          "type": "brand",
+          "settings": {
+            "logo": "shopify://shop_images/bb-logo-dry-go.png",
+            "collection": "dry-go"
+          }
+        },
+        "brand_penduline": {
+          "type": "brand",
+          "settings": {
+            "logo": "shopify://shop_images/bb-logo-penduline.png",
+            "collection": "penduline"
+          }
+        },
+        "brand_eva_bebe": {
+          "type": "brand",
+          "settings": {
+            "logo": "shopify://shop_images/bb-logo-eva-bebe.png",
+            "collection": "eva-bebe"
+          }
+        },
+        "brand_joie": {
+          "type": "brand",
+          "settings": {
+            "logo": "shopify://shop_images/bb-logo-joie.png",
+            "collection": "joie"
+          }
+        },
+        "brand_la_frutta_mum": {
+          "type": "brand",
+          "settings": {
+            "logo": "shopify://shop_images/bb-logo-la-frutta-mum.png",
+            "collection": "la-frutta-mum"
+          }
+        },
+        "brand_bubbles": {
+          "type": "brand",
+          "settings": {
+            "logo": "shopify://shop_images/bb-logo-bubbles.png",
+            "collection": "bubbles"
+          }
+        },
+        "brand_dabur_amla": {
+          "type": "brand",
+          "settings": {
+            "logo": "shopify://shop_images/bb-logo-dabur-amla.png",
+            "collection": "dabur-amla"
+          }
+        },
+        "brand_baby_time": {
+          "type": "brand",
+          "settings": {
+            "logo": "shopify://shop_images/bb-logo-baby-time.png",
+            "collection": "baby-time"
+          }
+        },
+        "brand_chicco": {
+          "type": "brand",
+          "settings": {
+            "logo": "shopify://shop_images/bb-logo-chicco.png",
+            "collection": "chicco"
+          }
+        },
+        "brand_molfix": {
+          "type": "brand",
+          "settings": {
+            "logo": "shopify://shop_images/bb-logo-molfix.png",
+            "collection": "molfix"
+          }
+        }
+      },
+      "block_order": [
+        "brand_fluoro",
+        "brand_super_kids",
+        "brand_sudocrem",
+        "brand_true",
+        "brand_blankie",
+        "brand_canpol_babies",
+        "brand_sofico_kids",
+        "brand_nuk",
+        "brand_johnsons",
+        "brand_pampers",
+        "brand_philips_avent",
+        "brand_bebem",
+        "brand_nitolic",
+        "brand_passion_baby",
+        "brand_sanosan",
+        "brand_farlin",
+        "brand_dry_go",
+        "brand_penduline",
+        "brand_eva_bebe",
+        "brand_joie",
+        "brand_la_frutta_mum",
+        "brand_bubbles",
+        "brand_dabur_amla",
+        "brand_baby_time",
+        "brand_chicco",
+        "brand_molfix"
+      ],
+      "settings": {
+        "heading": "bunny_baby.home.trusted_brands",
+        "duration": 60,
+        "padding_top": 16,
+        "padding_bottom": 8
+      }
+    },
+    "banner_dry_go": {
+      "type": "bb-banner",
+      "settings": {
+        "image": "shopify://shop_images/bb-banner-dry-go-desktop.webp",
+        "image_mobile": "shopify://shop_images/bb-banner-dry-go-mobile.webp",
+        "link": "shopify://collections/dry-go",
+        "alt": "bunny_baby.home.banner_dry_go",
+        "section_width": "page-width",
+        "padding_top": 16,
+        "padding_bottom": 8
+      }
+    },
+    "products_dry_go": {
+      "type": "product-list",
+      "blocks": {
+        "static-header": {
+          "type": "_product-list-content",
+          "name": "t:names.header",
+          "static": true,
+          "settings": {
+            "content_direction": "row",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "space-between",
+            "vertical_alignment": "flex-end",
+            "align_baseline": true,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 12,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {},
+          "block_order": []
+        },
+        "static-product-card": {
+          "type": "_product-card",
+          "name": "t:names.product_card",
+          "static": true,
+          "settings": {
+            "product_card_gap": 4,
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "product_card_gallery_677WP3": {
+              "type": "_product-card-gallery",
+              "name": "t:names.product_card_media",
+              "settings": {
+                "image_ratio": "adapt",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "product_title_YXxMTj": {
+              "type": "product-title",
+              "name": "t:names.product_title",
+              "settings": {
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "paragraph",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 4,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "price_JQzVV4": {
+              "type": "price",
+              "name": "t:names.product_price",
+              "settings": {
+                "show_sale_price_first": true,
+                "show_installments": false,
+                "show_tax_info": false,
+                "type_preset": "h6",
+                "width": "100%",
+                "alignment": "left",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "product_card_gallery_677WP3",
+            "product_title_YXxMTj",
+            "price_JQzVV4"
+          ]
+        }
+      },
+      "name": "t:names.featured_collection",
+      "settings": {
+        "collection": "dry-go",
+        "layout_type": "carousel",
+        "carousel_on_mobile": true,
+        "max_products": 12,
+        "columns": 4,
+        "mobile_columns": "2",
+        "mobile_card_size": "44cqw",
+        "columns_gap": 12,
+        "rows_gap": 16,
+        "icons_style": "arrow",
+        "icons_shape": "circle",
+        "section_width": "page-width",
+        "horizontal_alignment": "flex-start",
+        "gap": 0,
+        "padding-block-start": 8,
+        "padding-block-end": 24
+      }
+    },
+    "banner_outlet": {
+      "type": "bb-banner",
+      "settings": {
+        "image": "shopify://shop_images/bb-banner-outlet-desktop.webp",
+        "image_mobile": "shopify://shop_images/bb-banner-outlet-mobile.webp",
+        "link": "shopify://collections/outlet",
+        "alt": "bunny_baby.home.banner_outlet",
+        "section_width": "page-width",
+        "padding_top": 16,
+        "padding_bottom": 8
+      }
+    },
+    "products_outlet": {
+      "type": "product-list",
+      "blocks": {
+        "static-header": {
+          "type": "_product-list-content",
+          "name": "t:names.header",
+          "static": true,
+          "settings": {
+            "content_direction": "row",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "space-between",
+            "vertical_alignment": "flex-end",
+            "align_baseline": true,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 12,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {},
+          "block_order": []
+        },
+        "static-product-card": {
+          "type": "_product-card",
+          "name": "t:names.product_card",
+          "static": true,
+          "settings": {
+            "product_card_gap": 4,
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "product_card_gallery_677WP3": {
+              "type": "_product-card-gallery",
+              "name": "t:names.product_card_media",
+              "settings": {
+                "image_ratio": "adapt",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "product_title_YXxMTj": {
+              "type": "product-title",
+              "name": "t:names.product_title",
+              "settings": {
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "paragraph",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 4,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "price_JQzVV4": {
+              "type": "price",
+              "name": "t:names.product_price",
+              "settings": {
+                "show_sale_price_first": true,
+                "show_installments": false,
+                "show_tax_info": false,
+                "type_preset": "h6",
+                "width": "100%",
+                "alignment": "left",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "product_card_gallery_677WP3",
+            "product_title_YXxMTj",
+            "price_JQzVV4"
+          ]
+        }
+      },
+      "name": "t:names.featured_collection",
+      "settings": {
+        "collection": "outlet",
+        "layout_type": "carousel",
+        "carousel_on_mobile": true,
+        "max_products": 12,
+        "columns": 4,
+        "mobile_columns": "2",
+        "mobile_card_size": "44cqw",
+        "columns_gap": 12,
+        "rows_gap": 16,
+        "icons_style": "arrow",
+        "icons_shape": "circle",
+        "section_width": "page-width",
+        "horizontal_alignment": "flex-start",
+        "gap": 0,
+        "padding-block-start": 8,
+        "padding-block-end": 24
+      }
+    },
+    "blog": {
+      "type": "bb-blog",
+      "settings": {
+        "blog": "news",
+        "limit": 4,
+        "heading": "bunny_baby.home.blog_heading",
+        "subheading": "bunny_baby.home.blog_subheading",
+        "link_label": "bunny_baby.home.more_articles",
+        "padding_top": 24,
+        "padding_bottom": 32
       }
     }
   },
   "order": [
-    "hero_jVaWmY",
-    "product_list_fa6P9H"
+    "slideshow",
+    "products_wee_baby",
+    "stages",
+    "needs",
+    "banner_la_frutta_plus",
+    "products_la_frutta_plus",
+    "banner_baby_gear",
+    "products_baby_gear",
+    "banner_la_frutta_mum",
+    "products_la_frutta_mum",
+    "banner_shower",
+    "products_shower",
+    "brands",
+    "banner_dry_go",
+    "products_dry_go",
+    "banner_outlet",
+    "products_outlet",
+    "blog"
   ]
 }

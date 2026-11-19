@@ -11,10 +11,10 @@
   "current": {
     "logo_height": 36,
     "logo_height_mobile": 28,
-    "type_body_font": "inter_n4",
-    "type_subheading_font": "inter_n5",
-    "type_heading_font": "inter_n7",
-    "type_accent_font": "inter_n7",
+    "type_body_font": "almarai_n4",
+    "type_subheading_font": "almarai_n7",
+    "type_heading_font": "almarai_n8",
+    "type_accent_font": "almarai_n7",
     "type_size_paragraph": "14",
     "type_line_height_paragraph": "body-loose",
     "type_font_h1": "heading",
@@ -41,7 +41,7 @@
     "type_font_h6": "subheading",
     "type_size_h6": "12",
     "type_line_height_h6": "display-loose",
-    "page_width": "narrow",
+    "page_width": "normal",
     "page_transition_enabled": false,
     "transition_to_main_product": false,
     "card_hover_effect": "none",
@@ -82,7 +82,11 @@
       "color1": "#333333",
       "color2": "#EEF1EA",
       "color3": "#DFDFDF"
-    }
+    },
+    "mobile_quick_add": true,
+    "palette_primary_button_background": "#ED3095",
+    "palette_primary_button_border": "#ED3095",
+    "palette_primary_button_text": "#FFFFFF"
   },
   "presets": {
     "Default": {

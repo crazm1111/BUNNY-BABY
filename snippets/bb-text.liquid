@@ -1,0 +1,19 @@
+{%- doc -%}
+  Prints a text setting in the shopper's language.
+
+  If the text starts with "bunny_baby." it is treated as a translation key and
+  looked up in locales/ar.json and locales/en.default.json, so one value shows
+  Arabic on the Arabic store and English on the English store.
+  Any other text is printed as typed (same text in every language).
+
+  @param {string} text - The setting value or translation key.
+{%- enddoc -%}
+{%- liquid
+  assign bb_text = text | strip
+  assign bb_prefix = bb_text | slice: 0, 11
+  if bb_prefix == 'bunny_baby.'
+    echo bb_text | t
+  else
+    echo bb_text
+  endif
+-%}

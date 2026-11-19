@@ -1,0 +1,40 @@
+{%- doc -%}
+  Responsive banner image with an optional separate mobile image.
+
+  @param {image} image - Desktop image (also used on mobile when no mobile image is set).
+  @param {image} [image_mobile] - Image shown on screens under 750px wide.
+  @param {string} [alt] - Alt text. Falls back to the image's own alt text.
+  @param {boolean} [eager] - Load the image right away (use for the first slide).
+{%- enddoc -%}
+{%- liquid
+  assign bb_alt = alt | default: image.alt | escape
+  if eager
+    assign bb_loading = 'eager'
+    assign bb_priority = 'high'
+  else
+    assign bb_loading = 'lazy'
+    assign bb_priority = 'auto'
+  endif
+-%}
+<picture class="bb-picture">
+  {%- if image_mobile != blank -%}
+    <source
+      media="(max-width: 749px)"
+      srcset="{{ image_mobile | image_url: width: 400 }} 400w, {{ image_mobile | image_url: width: 750 }} 750w, {{ image_mobile | image_url: width: 1100 }} 1100w"
+      sizes="100vw"
+      width="{{ image_mobile.width }}"
+      height="{{ image_mobile.height }}"
+    >
+  {%- endif -%}
+  {{
+    image
+    | image_url: width: 2400
+    | image_tag:
+      widths: '750, 1100, 1500, 1920, 2400',
+      sizes: '(min-width: 1400px) 1400px, 100vw',
+      alt: bb_alt,
+      loading: bb_loading,
+      fetchpriority: bb_priority,
+      class: 'bb-picture__img'
+  }}
+</picture>

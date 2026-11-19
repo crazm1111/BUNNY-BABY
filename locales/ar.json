@@ -1,4 +1,38 @@
 {
+  "bunny_baby": {
+    "home": {
+      "shop_by_stage": "تسوق بالمرحلة",
+      "stage_0_6": "0-6 شهور",
+      "stage_6_12": "6-12 شهر",
+      "stage_1_3": "1-3 سنين",
+      "stage_mum": "العناية بالأم",
+      "trust_returns": "سهولة الاسترجاع",
+      "trust_delivery": "توصيل سريع",
+      "trust_cod": "الدفع عند الاستلام",
+      "trust_original": "منتجات أصلية 100%",
+      "shop_by_need": "تسوقي حسب احتياجك",
+      "need_feeding": "الببرونات",
+      "need_pacifiers": "السكاتات",
+      "need_shower": "الاستحمام",
+      "need_diapers": "الحفاضات",
+      "need_breastfeeding": "الرضاعة الطبيعية",
+      "need_strollers": "عربات الأطفال",
+      "need_car_seats": "كراسي السيارات",
+      "need_sleeping": "سراير النوم",
+      "trusted_brands": "براندات موثوقة",
+      "blog_heading": "ركن الأمومة ❤",
+      "blog_subheading": "اكتشفي مقالات ونصائح وتجارب واقعية لدعم رحلتك في الأمومة",
+      "more_articles": "مقالات أخرى",
+      "slide_wee_baby": "بني فرايداي: خصم 60% على منتجات وي بيبي",
+      "slide_essentials": "عروض بني فرايداي على مستلزمات الأطفال",
+      "banner_la_frutta_plus": "مجموعة لافروتا بلس للعناية بالطفل",
+      "banner_baby_gear": "عرض خاص على مستلزمات الأطفال",
+      "banner_la_frutta_mum": "مستلزمات الرضاعة من لافروتا مام",
+      "banner_shower": "وقت الاستحمام",
+      "banner_dry_go": "دراي جو للعناية بعد الولادة",
+      "banner_outlet": "خصومات الأوتليت"
+    }
+  },
   "accessibility": {
     "account": "الحساب",
     "active_filters": "عوامل التصفية النشطة:",
