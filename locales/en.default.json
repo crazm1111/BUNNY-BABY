@@ -9,7 +9,14 @@
  */
 {
   "bunny_baby": {
+    "footer": {
+      "about_heading": "About us",
+      "about_text": "At Bunny Baby, we’ve gathered everything you and your little one need, from pregnancy to your baby’s first steps. Safe, carefully selected products to ensure comfort and quality in every detail of your motherhood journey.",
+      "links_heading": "Useful links",
+      "follow_heading": "Follow us"
+    },
     "home": {
+      "view_all": "View all",
       "shop_by_stage": "Shop by stage",
       "stage_0_6": "0-6 months",
       "stage_6_12": "6-12 months",
