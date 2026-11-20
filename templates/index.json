@@ -1902,7 +1902,7 @@
     "blog": {
       "type": "bb-blog",
       "settings": {
-        "blog": "news",
+        "blog": "the-mommy-corner",
         "limit": 4,
         "heading": "bunny_baby.home.blog_heading",
         "subheading": "bunny_baby.home.blog_subheading",
