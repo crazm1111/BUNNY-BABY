@@ -19,6 +19,21 @@
     overflow: hidden;
   }
 
+  /*
+    Product titles in cards always take exactly two lines, so cards in a row
+    line up. Longer names are cut off with "...".
+  */
+  .product-card [ref='productTitleLink'] > .text-block > * {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    overflow: hidden;
+    overflow-wrap: anywhere;
+    min-height: 2.4em;
+    min-height: 2lh;
+  }
+
   .product-grid__card swatches-variant-picker-component overflow-list::part(list) {
     flex-wrap: wrap;
   }
