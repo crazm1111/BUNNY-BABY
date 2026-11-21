@@ -224,7 +224,7 @@
       },
       "name": "t:names.featured_collection",
       "settings": {
-        "collection": "offers-and-collections",
+        "collection": "wee-baby",
         "layout_type": "carousel",
         "carousel_on_mobile": true,
         "max_products": 12,
@@ -599,7 +599,7 @@
       },
       "name": "t:names.featured_collection",
       "settings": {
-        "collection": "baby-bottles",
+        "collection": "la-frutta-plus",
         "layout_type": "carousel",
         "carousel_on_mobile": true,
         "max_products": 12,
@@ -1023,7 +1023,7 @@
       },
       "name": "t:names.featured_collection",
       "settings": {
-        "collection": "breastfeeding-and-mum",
+        "collection": "la-frutta-mum",
         "layout_type": "carousel",
         "carousel_on_mobile": true,
         "max_products": 12,
@@ -1668,7 +1668,7 @@
       },
       "name": "t:names.featured_collection",
       "settings": {
-        "collection": "postpartum-recovery",
+        "collection": "dry-go",
         "layout_type": "carousel",
         "carousel_on_mobile": true,
         "max_products": 12,
