@@ -227,10 +227,15 @@
         "padding-block-start": 0,
         "padding-block-end": 32
       }
+    },
+    "subcats": {
+      "type": "subcollection-cards",
+      "settings": {}
     }
   },
   "order": [
     "section",
+    "subcats",
     "main"
   ]
 }
