@@ -410,7 +410,8 @@
     "banner_la_frutta_plus": {
       "type": "bb-banner",
       "settings": {
-        "image": "shopify://shop_images/bb-banner-la-frutta-plus.webp",
+        "image": "shopify://shop_images/Bunny_Friday_baby_essentials_banner_desktop.jpg",
+        "image_mobile": "shopify://shop_images/bb-banner-la-frutta-plus.webp",
         "link": "shopify://collections/la-frutta-plus",
         "alt": "bunny_baby.home.banner_la_frutta_plus",
         "section_width": "page-width",
