@@ -200,14 +200,11 @@
 }
 
 /* ---------- Product grid: 5 columns desktop, 2 mobile ---------- */
-.main-collection-grid .product-grid--grid {
-  --product-grid-gap: 10px;
-}
 
 @media screen and (min-width: 750px) {
   .main-collection-grid .product-grid--grid[product-grid-view='default'] {
     --product-grid-columns-desktop: repeat(3, minmax(0, 1fr));
-    --product-grid-gap: 16px;
+    --product-grid-gap: 20px;
   }
 }
 

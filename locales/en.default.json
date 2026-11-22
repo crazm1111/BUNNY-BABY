@@ -41,15 +41,19 @@
     "card": {
       "you_save": "You save {{ amount }}"
     },
+    "slideshow": {
+      "previous": "Previous slide",
+      "next": "Next slide"
+    },
     "announcement": {
       "previous": "Previous offer",
       "next": "Next offer",
       "sixty_message": "Wee Baby products",
-      "sixty_link": "Shop Wee Baby",
-      "fifteen_message": "Everything on the website",
+      "sixty_link": "Shop now",
+      "fifteen_message": "Everything sitewide",
       "fifteen_link": "Shop now",
-      "outlet_message": "Selected items at our lowest prices",
-      "outlet_link": "Shop the Outlet"
+      "outlet_message": "Our lowest prices",
+      "outlet_link": "Shop Outlet"
     },
     "nav": {
       "deals": "Bunny Friday deals",

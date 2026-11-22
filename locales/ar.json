@@ -41,14 +41,18 @@
     "card": {
       "you_save": "وفّري {{ amount }}"
     },
+    "slideshow": {
+      "previous": "الشريحة السابقة",
+      "next": "الشريحة التالية"
+    },
     "announcement": {
       "previous": "العرض السابق",
       "next": "العرض التالي",
       "sixty_message": "على منتجات Wee Baby",
-      "sixty_link": "تسوّقي Wee Baby",
+      "sixty_link": "تسوّقي دلوقتي",
       "fifteen_message": "على كل الموقع",
       "fifteen_link": "تسوّقي دلوقتي",
-      "outlet_message": "قطع مختارة بأقل الأسعار",
+      "outlet_message": "بأقل الأسعار",
       "outlet_link": "تسوّقي الأوتليت"
     },
     "nav": {

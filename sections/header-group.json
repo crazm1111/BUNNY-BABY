@@ -120,7 +120,7 @@
             "drawer_dividers": false,
             "drawer_divider_color": "",
             "bb_nav": true,
-            "bb_deals_url": "/collections/bunny-friday",
+            "bb_deals_url": "/collections/all",
             "bb_outlet_url": "shopify://collections/outlet",
             "bb_promo_wee_link": "shopify://collections/wee-baby"
           },

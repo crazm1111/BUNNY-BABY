@@ -1104,16 +1104,20 @@ html.bb-scroll-lock {
 }
 
 .product-card .product-card__content {
+  --product-card-gap: 6px;
+
   background: #fff;
   border: 1px solid var(--bb-line);
-  border-radius: 16px;
-  padding: 12px;
+  border-radius: 14px;
+  padding: 10px 10px 12px;
+  gap: 6px;
 }
 
 .product-card .card-gallery {
   background: var(--bb-field);
-  border-radius: var(--bb-radius);
+  border-radius: 10px;
   overflow: hidden;
+  margin-block-end: 2px;
 }
 
 .product-card .card-gallery img {
@@ -1121,41 +1125,111 @@ html.bb-scroll-lock {
 }
 
 .bb-card-vendor {
-  margin: 4px 0 0;
-  font-size: 12px;
+  margin: 2px 0 0;
+  font-size: 10.5px;
   font-weight: 700;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.05em;
+  line-height: 1.3;
   text-transform: uppercase;
   color: var(--bb-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .product-card [role='heading'] {
-  font-size: 15px;
-  line-height: 1.35;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.4;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
   line-clamp: 2;
   overflow: hidden;
+  min-height: 2.8em; /* keeps prices aligned across a row */
 }
 
 .product-card product-price .price,
 .product-card .price-item__group.price {
   color: var(--bb-pink-text);
-  font-size: 21px;
+  font-size: 16px;
   font-weight: 800;
 }
 
 .product-card .compare-at-price {
   color: #6b6b6b;
   text-decoration: line-through;
-  font-size: 14px;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.product-card [ref='priceContainer'] {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: 6px;
+  row-gap: 2px;
 }
 
 .bb-you-save {
   display: block;
-  margin-block-start: 2px;
+  flex-basis: 100%;
   color: var(--bb-blue-text);
-  font-size: 13px;
+  font-size: 11.5px;
   font-weight: 700;
+}
+
+.bb-badge {
+  font-size: 11px;
+  padding: 3px 8px;
+}
+
+.product-badges.bb-badges {
+  top: 8px;
+  inset-inline-start: 8px;
+  gap: 4px;
+}
+
+/* Grid and carousel gaps */
+.main-collection-grid .product-grid--grid {
+  --product-grid-gap: 12px;
+}
+
+@media screen and (min-width: 750px) {
+  .product-card .product-card__content {
+    padding: 14px 14px 16px;
+    gap: 8px;
+    border-radius: 16px;
+  }
+
+  .bb-card-vendor {
+    font-size: 11px;
+  }
+
+  .product-card [role='heading'] {
+    font-size: 14px;
+  }
+
+  .product-card product-price .price,
+  .product-card .price-item__group.price {
+    font-size: 18px;
+  }
+
+  .product-card .compare-at-price {
+    font-size: 13px;
+  }
+
+  .bb-you-save {
+    font-size: 12px;
+  }
+
+  .bb-badge {
+    font-size: 12px;
+    padding: 4px 10px;
+  }
+
+  .product-badges.bb-badges {
+    top: 10px;
+    inset-inline-start: 10px;
+  }
 }
