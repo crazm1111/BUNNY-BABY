@@ -167,6 +167,8 @@
       </ul>
       {% if enable_infinite_scroll != false %}
         <span ref="viewMoreNext"></span>
+      {% elsif section.settings.bb_load_more %}
+        {% render 'bb-load-more', paginate: paginate, products: products, section: section %}
       {% else %}
         {% render 'pagination-controls', paginate: paginate %}
       {% endif %}

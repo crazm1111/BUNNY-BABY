@@ -10,10 +10,10 @@
   assign current = collection
   assign subs = current.metafields.custom.subcollections.value
   assign parent = current.metafields.custom.parent_collection.value
-  assign mode = 'children'
+  assign all_target = current
   if subs == blank and section.settings.show_siblings and parent != blank
     assign subs = parent.metafields.custom.subcollections.value
-    assign mode = 'siblings'
+    assign all_target = parent
   endif
   assign shown = 0
   for c in subs
@@ -22,25 +22,43 @@
     endif
     assign shown = shown | plus: 1
   endfor
+  assign shape = section.settings.image_shape | default: 'tile'
+  if shape == 'tile'
+    assign img_sizes = '(min-width: 750px) 96px, 72px'
+  else
+    assign img_sizes = '120px'
+  endif
 -%}
 {%- if shown > 0 -%}
-  <div class="section section--{{ section.settings.section_width }} subcat-cards subcat-cards--{{ section.settings.image_shape }}" style="--subcat-size: {{ section.settings.card_size }}px; padding-block: {{ section.settings.padding_top }}px {{ section.settings.padding_bottom }}px;">
-    <nav class="subcat-cards__inner" aria-label="{{ section.settings.heading | default: current.title | escape }}">
-      {%- if section.settings.heading != blank -%}
+  <div class="section section--{{ section.settings.section_width }} subcat-cards subcat-cards--{{ shape }}" style="--subcat-size: {{ section.settings.card_size }}px; padding-block: {{ section.settings.padding_top }}px {{ section.settings.padding_bottom }}px;">
+    {%- liquid
+      assign nav_label = section.settings.heading
+      if nav_label == blank
+        assign nav_label = 'plp.subcategories' | t
+      endif
+    -%}
+    <nav class="subcat-cards__inner" aria-label="{{ nav_label | escape }}">
+      {%- if section.settings.heading != blank and shape != 'tile' -%}
         <p class="subcat-cards__heading h5">{{ section.settings.heading }}</p>
       {%- endif -%}
       <ul class="subcat-cards__list" role="list">
-        {%- if mode == 'siblings' and section.settings.show_parent_card -%}
+        {%- if section.settings.show_parent_card -%}
+          {%- liquid
+            assign all_label = 'plp.all_prefix' | t: title: all_target.title
+            if section.settings.all_label != blank
+              assign all_label = section.settings.all_label | append: ' ' | append: all_target.title
+            endif
+          -%}
           <li class="subcat-cards__item">
-            <a class="subcat-cards__link" href="{{ parent.url }}">
+            <a class="subcat-cards__link{% if all_target.id == current.id %} is-current{% endif %}" href="{{ all_target.url }}"{% if all_target.id == current.id %} aria-current="page"{% endif %}>
               <span class="subcat-cards__media">
-                {%- if parent.image -%}
-                  {{ parent.image | image_url: width: 300 | image_tag: loading: 'lazy', alt: parent.title, sizes: '120px' }}
-                {%- elsif parent.products.first.featured_image -%}
-                  {{ parent.products.first.featured_image | image_url: width: 300 | image_tag: loading: 'lazy', alt: parent.title, sizes: '120px' }}
+                {%- if all_target.image -%}
+                  {{ all_target.image | image_url: width: 300 | image_tag: loading: 'lazy', alt: '', sizes: img_sizes, widths: '150, 200, 300' }}
+                {%- elsif all_target.products.first.featured_image -%}
+                  {{ all_target.products.first.featured_image | image_url: width: 300 | image_tag: loading: 'lazy', alt: '', sizes: img_sizes, widths: '150, 200, 300' }}
                 {%- endif -%}
               </span>
-              <span class="subcat-cards__title">{{ section.settings.all_label | default: 'All' }} {{ parent.title }}</span>
+              <span class="subcat-cards__title">{{ all_label }}</span>
             </a>
           </li>
         {%- endif -%}
@@ -50,13 +68,13 @@
             <a class="subcat-cards__link{% if c.id == current.id %} is-current{% endif %}" href="{{ c.url }}"{% if c.id == current.id %} aria-current="page"{% endif %}>
               <span class="subcat-cards__media">
                 {%- if c.image -%}
-                  {{ c.image | image_url: width: 300 | image_tag: loading: 'lazy', alt: c.title, sizes: '120px' }}
+                  {{ c.image | image_url: width: 300 | image_tag: loading: 'lazy', alt: '', sizes: img_sizes, widths: '150, 200, 300' }}
                 {%- elsif c.products.first.featured_image -%}
-                  {{ c.products.first.featured_image | image_url: width: 300 | image_tag: loading: 'lazy', alt: c.title, sizes: '120px' }}
+                  {{ c.products.first.featured_image | image_url: width: 300 | image_tag: loading: 'lazy', alt: '', sizes: img_sizes, widths: '150, 200, 300' }}
                 {%- endif -%}
               </span>
               <span class="subcat-cards__title">{{ c.title }}</span>
-              {%- if section.settings.show_count -%}
+              {%- if section.settings.show_count and shape != 'tile' -%}
                 <span class="subcat-cards__count">{{ c.products_count }}</span>
               {%- endif -%}
             </a>
@@ -97,6 +115,41 @@
   @media (min-width: 750px) {
     .subcat-cards__list { flex-wrap: wrap; overflow: visible; gap: 24px; }
   }
+  /* Tile style (board 14) */
+  .subcat-cards--tile .subcat-cards__list {
+    flex-wrap: nowrap; overflow-x: auto; overflow-y: hidden; gap: 10px;
+    scroll-snap-type: inline mandatory; scroll-padding-inline: 0;
+    scrollbar-width: none; overscroll-behavior-inline: contain; padding: 0 0 2px;
+  }
+  .subcat-cards--tile .subcat-cards__list::-webkit-scrollbar { display: none; }
+  .subcat-cards--tile .subcat-cards__item { flex: 0 0 128px; scroll-snap-align: start; }
+  .subcat-cards--tile .subcat-cards__link {
+    height: 100%; gap: 8px; justify-content: flex-start;
+    background: #fbe8f0; border-radius: 6px; border: 2px solid transparent;
+    padding: 16px 8px 14px; color: var(--bb-text, #1d1d1f);
+  }
+  .subcat-cards--tile .subcat-cards__link.is-current { border-color: var(--bb-pink-action, #d1197c); }
+  .subcat-cards--tile .subcat-cards__link.is-current .subcat-cards__title { font-weight: 800; }
+  .subcat-cards--tile .subcat-cards__media {
+    width: 72px; height: 72px; aspect-ratio: auto; border: 0; border-radius: 0;
+    background: transparent; display: flex; align-items: center; justify-content: center;
+  }
+  .subcat-cards--tile .subcat-cards__media:empty { display: none; }
+  .subcat-cards--tile .subcat-cards__media img { object-fit: contain; width: 100%; height: 100%; }
+  .subcat-cards--tile .subcat-cards__link:hover .subcat-cards__media { transform: none; }
+  .subcat-cards--tile .subcat-cards__link:hover { border-color: #f3c3da; }
+  .subcat-cards--tile .subcat-cards__link.is-current:hover { border-color: var(--bb-pink-action, #d1197c); }
+  .subcat-cards--tile .subcat-cards__link:focus-visible { outline: 2px solid var(--bb-pink-action, #d1197c); outline-offset: 2px; border-radius: 6px; }
+  .subcat-cards--tile .subcat-cards__title {
+    font-size: 13px; font-weight: 700; line-height: 1.3; text-align: center;
+    display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; overflow: hidden;
+  }
+  @media (min-width: 750px) {
+    .subcat-cards--tile .subcat-cards__list { flex-wrap: nowrap; overflow-x: auto; gap: 14px; }
+    .subcat-cards--tile .subcat-cards__item { flex-basis: 158px; }
+    .subcat-cards--tile .subcat-cards__media { width: 96px; height: 96px; }
+    .subcat-cards--tile .subcat-cards__title { font-size: 15px; }
+  }
   @media (prefers-reduced-motion: reduce) {
     .subcat-cards__media { transition: none; }
     .subcat-cards__link:hover .subcat-cards__media { transform: none; }
@@ -112,11 +165,11 @@
     { "type": "paragraph", "content": "Shows the collection's subcategories (metafield custom.subcollections). On a subcategory page it shows its sibling subcategories (via custom.parent_collection)." },
     { "type": "text", "id": "heading", "label": "Heading", "default": "Shop by category" },
     { "type": "checkbox", "id": "show_siblings", "label": "On subcategory pages, show sibling subcategories", "default": true },
-    { "type": "checkbox", "id": "show_parent_card", "label": "On subcategory pages, add an \"All <parent>\" card", "default": true },
-    { "type": "text", "id": "all_label", "label": "Label before the parent name", "default": "All" },
+    { "type": "checkbox", "id": "show_parent_card", "label": "Add an \"All <collection>\" card first", "default": true },
+    { "type": "text", "id": "all_label", "label": "Label before the parent name", "info": "Leave empty to use the translated \"All …\" / \"كل …\"." },
     { "type": "checkbox", "id": "hide_empty", "label": "Hide subcategories with no products", "default": true },
     { "type": "checkbox", "id": "show_count", "label": "Show product count", "default": false },
-    { "type": "select", "id": "image_shape", "label": "Image shape", "options": [ { "value": "circle", "label": "Circle" }, { "value": "square", "label": "Rounded square" } ], "default": "circle" },
+    { "type": "select", "id": "image_shape", "label": "Image shape", "options": [ { "value": "tile", "label": "Tile" }, { "value": "circle", "label": "Circle" }, { "value": "square", "label": "Rounded square" } ], "default": "tile" },
     { "type": "range", "id": "card_size", "label": "Card image size", "min": 64, "max": 200, "step": 8, "unit": "px", "default": 104 },
     { "type": "select", "id": "section_width", "label": "Width", "options": [ { "value": "page-width", "label": "Page" }, { "value": "full-width", "label": "Full" } ], "default": "page-width" },
     { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 80, "step": 4, "unit": "px", "default": 8 },

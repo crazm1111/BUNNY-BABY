@@ -88,7 +88,11 @@
           class="facets__label"
           id="sort-label-{{ section_id }}"
         >
-          {{- 'actions.sort' | t -}}
+          {%- if sort_position == 'desktop' -%}
+            {{- 'plp.sort_label' | t: option: status -}}
+          {%- else -%}
+            {{- 'actions.sort' | t -}}
+          {%- endif -%}
         </span>
         <span
           class="facets__status h6 desktop:hidden"

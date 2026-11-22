@@ -8,6 +8,22 @@
  * ------------------------------------------------------------
  */
 {
+  "plp": {
+    "breadcrumb_home": "الرئيسية",
+    "breadcrumb_label": "مسار التنقل",
+    "count": "{{ count }} منتج",
+    "read_more": "اقرأ المزيد",
+    "read_less": "عرض أقل",
+    "all_prefix": "كل {{ title }}",
+    "in_stock": "المتوفر فقط",
+    "sort_label": "الترتيب: {{ option }}",
+    "filters_button": "الفلاتر ({{ count }})",
+    "showing": "عرض {{ shown }} من {{ total }} منتج",
+    "load_more": "تحميل منتجات أكتر",
+    "subcategories": "الأقسام الفرعية",
+    "sort_heading": "الترتيب حسب",
+    "close": "إغلاق"
+  },
   "bb": {
     "badge": {
       "outlet": "أوتليت",

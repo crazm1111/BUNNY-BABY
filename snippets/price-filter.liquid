@@ -21,7 +21,7 @@
 -%}
 {% capture accordion_children %}
   <details
-    class="facets__panel"
+    class="facets__panel{% if filter.min_value.value != null or filter.max_value.value != null %} facets__panel--active{% endif %}"
     {% if filter_style == 'horizontal' %}
       data-auto-close-details="desktop"
     {% endif %}

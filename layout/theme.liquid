@@ -21,6 +21,7 @@
     {%- render 'stylesheets' -%}
     {{ 'bb-home.css' | asset_url | stylesheet_tag }}
     {{ 'bb-campaign.css' | asset_url | stylesheet_tag }}
+    {%- if template.name == 'collection' -%}{{ 'bb-plp.css' | asset_url | stylesheet_tag }}{%- endif -%}
     {%- render 'card-hover-effect-styles' -%}
     {%- render 'scripts' -%}
     {%- render 'theme-styles-variables' -%}

@@ -1,0 +1,73 @@
+{%- comment -%}
+  Collection page header (Bunny Baby): breadcrumb, H1 + product count, clamped description.
+  Parent collection comes from the collection metafield custom.parent_collection.
+{%- endcomment -%}
+{%- liquid
+  assign parent = collection.metafields.custom.parent_collection.value
+  assign description = collection.description | strip
+-%}
+
+<div
+  class="section section--page-width bb-plp-head"
+  style="--bb-head-pt: {{ section.settings.padding_top }}px; --bb-head-pb: {{ section.settings.padding_bottom }}px;"
+>
+  <div class="bb-plp-head__inner">
+    <nav class="bb-breadcrumb" aria-label="{{ 'plp.breadcrumb_label' | t }}">
+      <ol class="bb-breadcrumb__list" role="list">
+        <li class="bb-breadcrumb__item">
+          <a href="{{ routes.root_url }}">{{ 'plp.breadcrumb_home' | t }}</a>
+        </li>
+        {%- if parent != blank and parent.id != collection.id -%}
+          <li class="bb-breadcrumb__item">
+            <a href="{{ parent.url }}">{{ parent.title }}</a>
+          </li>
+        {%- endif -%}
+        <li class="bb-breadcrumb__item">
+          <span aria-current="page">{{ collection.title }}</span>
+        </li>
+      </ol>
+    </nav>
+
+    <div class="bb-plp-head__title-row">
+      <h1 class="bb-plp-head__title">{{ collection.title }}</h1>
+      <span class="bb-plp-head__count">{{ 'plp.count' | t: count: collection.products_count }}</span>
+    </div>
+
+    {%- if description != blank and section.settings.show_description -%}
+      <bb-read-more class="bb-plp-head__desc">
+        <div class="bb-plp-head__desc-text rte" id="BbCollectionDesc-{{ section.id }}" data-bb-clamp>
+          {{ collection.description }}
+        </div>
+        <button
+          type="button"
+          class="bb-plp-head__more button-unstyled"
+          aria-expanded="false"
+          aria-controls="BbCollectionDesc-{{ section.id }}"
+          data-label-more="{{ 'plp.read_more' | t | escape }}"
+          data-label-less="{{ 'plp.read_less' | t | escape }}"
+          hidden
+        >
+          {{- 'plp.read_more' | t -}}
+        </button>
+      </bb-read-more>
+    {%- endif -%}
+  </div>
+</div>
+
+<script src="{{ 'bb-plp.js' | asset_url }}" type="module" fetchpriority="low"></script>
+
+{% schema %}
+{
+  "name": "Collection header",
+  "tag": "section",
+  "class": "section-wrapper",
+  "settings": [
+    { "type": "paragraph", "content": "Breadcrumb (uses custom.parent_collection), title with product count, and a description clamped to two lines." },
+    { "type": "checkbox", "id": "show_description", "label": "Show description", "default": true },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 64, "step": 2, "unit": "px", "default": 16 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 64, "step": 2, "unit": "px", "default": 8 }
+  ],
+  "presets": [{ "name": "Collection header" }],
+  "enabled_on": { "templates": ["collection"] }
+}
+{% endschema %}

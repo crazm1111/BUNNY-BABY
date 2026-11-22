@@ -39,7 +39,7 @@
 {% capture accordion_children %}
   <details
     id="Facet-Details-{{ sectionId }}-{{ filter.param_name | escape | replace: '.', '-' }}"
-    class="facets__panel"
+    class="facets__panel{% if active_value_count > 0 %} facets__panel--active{% endif %}"
     {% if filter_style == 'horizontal' %}
       data-auto-close-details="desktop"
     {% endif %}
@@ -271,7 +271,7 @@
                       for="{{ input_id }}"
                       tabindex="-1"
                     >
-                      {{- value.label }}
+                      {{- value.label | remove_first: 'badge:' | remove_first: 'Age: ' }}
                     </label>
                   </fieldset>
                 {% elsif is_swatch %}
@@ -322,7 +322,7 @@
                         for="{{ input_id }}"
                         tabindex="-1"
                       >
-                        {{- value.label }}
+                        {{- value.label | remove_first: 'badge:' | remove_first: 'Age: ' }}
                       </label>
                     </label>
                   </fieldset>
@@ -353,7 +353,7 @@
                         for="{{ input_id }}"
                         tabindex="0"
                       >
-                        {{- value.label }}
+                        {{- value.label | remove_first: 'badge:' | remove_first: 'Age: ' }}
                         {% if is_disabled %}
                           <svg
                             aria-hidden="true"

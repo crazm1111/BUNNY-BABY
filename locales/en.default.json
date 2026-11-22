@@ -8,6 +8,22 @@
  * ------------------------------------------------------------
  */
 {
+  "plp": {
+    "breadcrumb_home": "Home",
+    "breadcrumb_label": "Breadcrumb",
+    "count": "{{ count }} products",
+    "read_more": "Read more",
+    "read_less": "Show less",
+    "all_prefix": "All {{ title }}",
+    "in_stock": "In stock only",
+    "sort_label": "Sort: {{ option }}",
+    "filters_button": "Filters ({{ count }})",
+    "showing": "Showing {{ shown }} of {{ total }} products",
+    "load_more": "Load more products",
+    "subcategories": "Subcategories",
+    "sort_heading": "Sort by",
+    "close": "Close"
+  },
   "bb": {
     "badge": {
       "outlet": "OUTLET",
