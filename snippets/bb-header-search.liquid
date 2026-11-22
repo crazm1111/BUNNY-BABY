@@ -1,0 +1,26 @@
+{%- doc -%}
+  Visible desktop search field (Bunny Friday header). Submits to /search without JS;
+  with JS, typing or clicking hands the query to the predictive search modal.
+
+  @param {string} [id] - Unique id suffix for the input.
+{%- enddoc -%}
+
+{%- assign input_id = 'BbHeaderSearch-' | append: id -%}
+<bb-header-search class="bb-search">
+  <form action="{{ routes.search_url }}" method="get" role="search" class="bb-search__form">
+    <label for="{{ input_id }}" class="visually-hidden">{{ 'content.search_input_label' | t }}</label>
+    <input
+      id="{{ input_id }}"
+      class="bb-search__input"
+      type="search"
+      name="q"
+      autocomplete="off"
+      placeholder="{{ 'bb.search.placeholder' | t }}"
+      value="{{ search.terms | escape }}"
+    >
+    <input name="options[prefix]" type="hidden" value="last">
+    <button type="submit" class="bb-search__submit" aria-label="{{ 'bb.search.submit' | t }}">
+      <span class="svg-wrapper" aria-hidden="true">{{ 'icon-search.svg' | inline_asset_content }}</span>
+    </button>
+  </form>
+</bb-header-search>

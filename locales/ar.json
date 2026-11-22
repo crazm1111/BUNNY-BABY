@@ -8,6 +8,79 @@
  * ------------------------------------------------------------
  */
 {
+  "bb": {
+    "badge": {
+      "outlet": "أوتليت",
+      "sixty": "خصم 60%",
+      "fifteen": "خصم 15%"
+    },
+    "campaign": {
+      "ends": "العروض تنتهي 30 نوفمبر",
+      "until": "لحد 30 نوفمبر",
+      "ends_pill": "العرض ينتهي 30 نوفمبر",
+      "offers_heading": "عروض بني فرايداي",
+      "carousel_subline": "خصم 60% على Wee Baby · خصم 15% على كل الباقي · أسعار الأوتليت",
+      "view_all_deals": "كل العروض"
+    },
+    "card": {
+      "you_save": "وفّري {{ amount }}"
+    },
+    "announcement": {
+      "previous": "العرض السابق",
+      "next": "العرض التالي",
+      "sixty_message": "على منتجات Wee Baby",
+      "sixty_link": "تسوّقي Wee Baby",
+      "fifteen_message": "على كل الموقع",
+      "fifteen_link": "تسوّقي دلوقتي",
+      "outlet_message": "قطع مختارة بأقل الأسعار",
+      "outlet_link": "تسوّقي الأوتليت"
+    },
+    "nav": {
+      "deals": "عروض بني فرايداي",
+      "more": "المزيد",
+      "back": "رجوع",
+      "view_all": "عرض كل {{ title }}",
+      "sections": "{{ count }} أقسام",
+      "category_strip": "خصم 15% على كل منتجات القسم · لحد 30 نوفمبر",
+      "shop_by_age": "تسوّقي حسب العمر",
+      "brands": "البراندات",
+      "all_brands": "كل البراندات",
+      "categories": "الأقسام",
+      "outlet": "أوتليت",
+      "open_menu": "فتح القائمة",
+      "close_menu": "إغلاق القائمة",
+      "main_menu": "القائمة الرئيسية",
+      "show_submenu": "فتح {{ title }}"
+    },
+    "drawer": {
+      "sixty_title": "خصم 60%",
+      "sixty_text": "على منتجات Wee Baby",
+      "fifteen_title": "خصم 15%",
+      "fifteen_text": "على كل الموقع",
+      "outlet_title": "أوتليت",
+      "outlet_text": "قطع مختارة بأقل الأسعار",
+      "sixty_category": "خصم 60% — منتجات Wee Baby في القسم ده",
+      "outlet_category": "أوتليت — قطع مختارة بأقل الأسعار"
+    },
+    "mega": {
+      "sixty_badge": "خصم 60%",
+      "sixty_heading": "ببرونات وحلمات Wee Baby",
+      "sixty_text": "لحد 30 نوفمبر",
+      "fifteen_badge": "خصم 15%",
+      "fifteen_heading": "على كل منتجات {{ title }}",
+      "shop_now": "تسوّقي دلوقتي"
+    },
+    "search": {
+      "placeholder": "دوّري على ببرونات، حفاضات، براندات…",
+      "submit": "بحث"
+    },
+    "help": {
+      "whatsapp": "مساعدة على واتساب"
+    },
+    "trust": {
+      "line": "الدفع عند الاستلام · منتجات أصلية 100%"
+    }
+  },
   "bunny_baby": {
     "footer": {
       "about_heading": "من نحن",

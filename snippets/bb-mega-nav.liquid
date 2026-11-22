@@ -1,0 +1,194 @@
+{%- doc -%}
+  Bunny Friday desktop menu row: deals pill, category items with a four-column mega menu,
+  a "More" item, and an Outlet pill pushed to the end. Built from the menu chosen in the
+  header menu block (category-menu), so it follows menu changes in the admin.
+
+  @param {object} block - The _header-menu block (settings + menu).
+{%- enddoc -%}
+
+{%- liquid
+  assign bs = block.settings
+  assign menu = bs.menu
+
+  assign bb_today = 'now' | date: '%Y-%m-%d'
+  assign campaign_live = false
+  if settings.bb_campaign_on and settings.bb_campaign_end != blank and bb_today <= settings.bb_campaign_end
+    assign campaign_live = true
+  endif
+
+  assign hidden_keys = bs.bb_hidden_handles | remove: ' ' | split: ','
+  assign more_keys = bs.bb_more_handles | remove: ' ' | split: ','
+  assign wee_keys = bs.bb_wee_handles | remove: ' ' | split: ','
+  assign age_key = bs.bb_age_handle | strip
+  assign brands_key = bs.bb_brands_handle | strip
+
+  assign age_link = null
+  assign brands_link = null
+  for link in menu.links
+    assign url_key = link.url | split: '?' | first | split: '/' | last
+    if link.handle == age_key or url_key == age_key
+      assign age_link = link
+    elsif link.handle == brands_key or url_key == brands_key
+      assign brands_link = link
+    endif
+  endfor
+
+  assign has_more = false
+  for link in menu.links
+    assign url_key = link.url | split: '?' | first | split: '/' | last
+    if more_keys contains link.handle or more_keys contains url_key
+      assign has_more = true
+      break
+    endif
+  endfor
+-%}
+
+{%- capture shared_column -%}
+  {%- if age_link != blank and age_link.links != blank -%}
+    <p class="bb-mega__label">{{ 'bb.nav.shop_by_age' | t }}</p>
+    <ul class="bb-mega__list bb-mega__list--compact" role="list">
+      {%- for child in age_link.links -%}
+        <li><a class="bb-mega__link" href="{{ child.url }}">{{ child.title }}</a></li>
+      {%- endfor -%}
+    </ul>
+  {%- endif -%}
+  {%- if brands_link != blank and brands_link.links != blank -%}
+    <p class="bb-mega__label">{{ 'bb.nav.brands' | t }}</p>
+    <ul class="bb-mega__list bb-mega__list--compact" role="list">
+      {%- for child in brands_link.links limit: 6 -%}
+        <li><a class="bb-mega__link" href="{{ child.url }}">{{ child.title }}</a></li>
+      {%- endfor -%}
+      <li><a class="bb-mega__link bb-mega__link--accent" href="{{ brands_link.url }}">{{ 'bb.nav.all_brands' | t }}</a></li>
+    </ul>
+  {%- endif -%}
+{%- endcapture -%}
+
+<nav class="bb-nav__nav" aria-label="{{ 'accessibility.header_navigation_label' | t }}">
+  <ul class="bb-nav__list" role="list">
+    {%- if bs.bb_deals_url != blank -%}
+      <li class="bb-nav__item">
+        <a class="bb-nav__pill bb-nav__pill--deals" href="{{ bs.bb_deals_url }}">
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M3 12V4h8l10 10-8 8L3 12z"/><circle cx="7.5" cy="8.5" r="1.5" fill="currentColor" stroke="none"/></svg>
+          <span>{{ 'bb.nav.deals' | t }}</span>
+        </a>
+      </li>
+    {%- endif -%}
+
+    {%- for link in menu.links -%}
+      {%- liquid
+        assign url_key = link.url | split: '?' | first | split: '/' | last
+        if hidden_keys contains link.handle or hidden_keys contains url_key
+          continue
+        endif
+        if more_keys contains link.handle or more_keys contains url_key
+          continue
+        endif
+        if link.handle == age_key or url_key == age_key or link.handle == brands_key or url_key == brands_key
+          continue
+        endif
+        assign panel_id = 'BbMega-' | append: block.id | append: '-' | append: forloop.index
+        assign show_wee = false
+        if campaign_live and wee_keys contains url_key or campaign_live and wee_keys contains link.handle
+          assign show_wee = true
+        endif
+      -%}
+      <li class="bb-nav__item" data-bb-nav-item>
+        {%- if link.links != blank -%}
+          <button
+            type="button"
+            class="bb-nav__link button-unstyled{% if link.active %} bb-nav__link--active{% endif %}"
+            aria-expanded="false"
+            aria-controls="{{ panel_id }}"
+            data-bb-nav-trigger
+          >
+            {{- link.title -}}
+            <svg class="bb-nav__caret" aria-hidden="true" focusable="false" viewBox="0 0 10 6" width="10" height="6"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+          </button>
+          <div class="bb-mega" id="{{ panel_id }}" hidden data-bb-nav-panel>
+            <div class="bb-mega__inner">
+              <div class="bb-mega__col">
+                <p class="bb-mega__label">{{ link.title }}</p>
+                <ul class="bb-mega__list" role="list">
+                  {%- for child in link.links -%}
+                    <li>
+                      <a class="bb-mega__link" href="{{ child.url }}"{% if child.current %} aria-current="page"{% endif %}>{{ child.title }}</a>
+                    </li>
+                  {%- endfor -%}
+                </ul>
+                <a class="bb-mega__view-all" href="{{ link.url }}">
+                  {{- 'bb.nav.view_all' | t: title: link.title }} <span class="bb-arrow" aria-hidden="true">→</span>
+                </a>
+              </div>
+
+              <div class="bb-mega__col">{{ shared_column }}</div>
+
+              <div class="bb-mega__col">
+                {%- if show_wee -%}
+                  {% render 'bb-promo-card', variant: 'wee', block: block, category: link %}
+                {%- endif -%}
+              </div>
+
+              <div class="bb-mega__col">
+                {%- if campaign_live -%}
+                  {% render 'bb-promo-card', variant: 'site', block: block, category: link %}
+                {%- endif -%}
+              </div>
+            </div>
+          </div>
+        {%- else -%}
+          <a
+            class="bb-nav__link{% if link.active %} bb-nav__link--active{% endif %}"
+            href="{{ link.url }}"
+            {% if link.current %}aria-current="page"{% endif %}
+          >
+            {{- link.title -}}
+          </a>
+        {%- endif -%}
+      </li>
+    {%- endfor -%}
+
+    {%- if has_more -%}
+      {%- assign more_id = 'BbMega-' | append: block.id | append: '-more' -%}
+      <li class="bb-nav__item" data-bb-nav-item>
+        <button
+          type="button"
+          class="bb-nav__link button-unstyled"
+          aria-expanded="false"
+          aria-controls="{{ more_id }}"
+          data-bb-nav-trigger
+        >
+          {{- 'bb.nav.more' | t -}}
+          <svg class="bb-nav__caret" aria-hidden="true" focusable="false" viewBox="0 0 10 6" width="10" height="6"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+        </button>
+        <div class="bb-mega" id="{{ more_id }}" hidden data-bb-nav-panel>
+          <div class="bb-mega__inner">
+            {%- for link in menu.links -%}
+              {%- assign url_key = link.url | split: '?' | first | split: '/' | last -%}
+              {%- if more_keys contains link.handle or more_keys contains url_key -%}
+                <div class="bb-mega__col">
+                  <p class="bb-mega__label">{{ link.title }}</p>
+                  {%- if link.links != blank -%}
+                    <ul class="bb-mega__list" role="list">
+                      {%- for child in link.links -%}
+                        <li><a class="bb-mega__link" href="{{ child.url }}">{{ child.title }}</a></li>
+                      {%- endfor -%}
+                    </ul>
+                  {%- endif -%}
+                  <a class="bb-mega__view-all" href="{{ link.url }}">
+                    {{- 'bb.nav.view_all' | t: title: link.title }} <span class="bb-arrow" aria-hidden="true">→</span>
+                  </a>
+                </div>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        </div>
+      </li>
+    {%- endif -%}
+
+    {%- if bs.bb_outlet_url != blank -%}
+      <li class="bb-nav__item bb-nav__item--end">
+        <a class="bb-nav__pill bb-nav__pill--outlet" href="{{ bs.bb_outlet_url }}">{{ 'bb.nav.outlet' | t }}</a>
+      </li>
+    {%- endif -%}
+  </ul>
+</nav>

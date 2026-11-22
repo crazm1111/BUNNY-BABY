@@ -18,12 +18,16 @@
       data-hydration-key="header-drawer-mobile"
       {{ block.shopify_attributes }}
     >
-      {% render 'header-drawer',
-        linklist: block_settings.menu,
-        data_header_drawer_type: 'mobile-drawer',
-        block: block,
-        section: section
-      %}
+      {% if block_settings.bb_nav %}
+        {% render 'bb-drawer', block: block %}
+      {% else %}
+        {% render 'header-drawer',
+          linklist: block_settings.menu,
+          data_header_drawer_type: 'mobile-drawer',
+          block: block,
+          section: section
+        %}
+      {% endif %}
     </div>
 
   {% when 'navigation_bar' %}
@@ -63,6 +67,16 @@
       </div>
     {% endif %}
   {% else %}
+    {% if block_settings.bb_nav %}
+      <bb-mega-nav
+        ref="headerMenu"
+        class="header-menu bb-nav"
+        {{ block.shopify_attributes }}
+        data-skip-node-update
+      >
+        {% render 'bb-mega-nav', block: block %}
+      </bb-mega-nav>
+    {% else %}
     {% liquid
       assign block_settings = block.settings
       assign menu_content_type = block_settings.menu_style | default: 'text'
@@ -220,7 +234,12 @@
         fetchpriority="low"
       ></script>
     </header-menu>
+    {% endif %}
 {% endcase %}
+
+{% if block_settings.bb_nav %}
+  <script src="{{ 'bb-campaign.js' | asset_url }}" type="module" fetchpriority="low"></script>
+{% endif %}
 
 {% style %}
   .header__underlay {
@@ -957,6 +976,142 @@
   "name": "t:names.menu",
   "tag": null,
   "settings": [
+    {
+      "type": "checkbox",
+      "id": "bb_nav",
+      "label": "Bunny Friday menu (deals pill, mega menu, drill-down drawer)",
+      "info": "Turn off to go back to the standard Horizon menu and drawer.",
+      "default": true
+    },
+    {
+      "type": "url",
+      "id": "bb_deals_url",
+      "label": "\"Bunny Friday deals\" pill link",
+      "info": "Leave empty to hide the pill."
+    },
+    {
+      "type": "url",
+      "id": "bb_outlet_url",
+      "label": "Outlet pill link",
+      "info": "Leave empty to hide the pill."
+    },
+    {
+      "type": "text",
+      "id": "bb_hidden_handles",
+      "label": "Menu items hidden from the desktop row",
+      "info": "Comma-separated menu-item or collection handles.",
+      "default": "offers-collections,offers-and-collections"
+    },
+    {
+      "type": "text",
+      "id": "bb_more_handles",
+      "label": "Menu items grouped under \"More\" (desktop)",
+      "info": "Comma-separated collection handles.",
+      "default": "health-and-grooming,play-and-outdoor,gifts-and-bundles"
+    },
+    {
+      "type": "text",
+      "id": "bb_drawer_hidden_handles",
+      "label": "Menu items hidden from the mobile drawer",
+      "info": "Comma-separated menu-item or collection handles."
+    },
+    {
+      "type": "text",
+      "id": "bb_offers_handles",
+      "label": "Offers menu item (shows the Outlet pill and card)",
+      "default": "offers-collections,offers-and-collections"
+    },
+    {
+      "type": "text",
+      "id": "bb_age_handle",
+      "label": "\"Shop by age\" menu item handle",
+      "default": "shop-by-age"
+    },
+    {
+      "type": "text",
+      "id": "bb_brands_handle",
+      "label": "\"Brands\" menu item handle",
+      "default": "brands"
+    },
+    {
+      "type": "text",
+      "id": "bb_drawer_brands",
+      "label": "Brand chips in the mobile drawer",
+      "info": "Comma-separated collection handles, in order.",
+      "default": "wee-baby,la-frutta,chicco,nuk,philips-avent"
+    },
+    {
+      "type": "header",
+      "content": "Mega menu: 60% Wee Baby card"
+    },
+    {
+      "type": "text",
+      "id": "bb_wee_handles",
+      "label": "Categories that show the 60% card",
+      "info": "Comma-separated collection handles. Also used for the 60% card in the mobile drawer.",
+      "default": "feeding,breastfeeding-and-mum,weaning-and-mealtime,soothers-and-teething,health-and-grooming"
+    },
+    {
+      "type": "image_picker",
+      "id": "bb_promo_wee_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "bb_promo_wee_badge",
+      "label": "Badge",
+      "info": "Empty = translated default."
+    },
+    {
+      "type": "text",
+      "id": "bb_promo_wee_heading",
+      "label": "Heading",
+      "info": "Empty = translated default."
+    },
+    {
+      "type": "text",
+      "id": "bb_promo_wee_text",
+      "label": "Text",
+      "info": "Empty = translated default."
+    },
+    {
+      "type": "url",
+      "id": "bb_promo_wee_link",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Mega menu: 15% card"
+    },
+    {
+      "type": "image_picker",
+      "id": "bb_promo_site_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "bb_promo_site_badge",
+      "label": "Badge",
+      "info": "Empty = translated default."
+    },
+    {
+      "type": "text",
+      "id": "bb_promo_site_heading",
+      "label": "Heading",
+      "info": "Use [category] for the category name. Empty = translated default."
+    },
+    {
+      "type": "text",
+      "id": "bb_promo_site_text",
+      "label": "Text",
+      "info": "Empty = translated default."
+    },
+    {
+      "type": "url",
+      "id": "bb_promo_site_link",
+      "label": "Link",
+      "info": "Empty = the category."
+    },
     {
       "type": "link_list",
       "id": "menu",

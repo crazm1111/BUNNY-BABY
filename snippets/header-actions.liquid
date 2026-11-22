@@ -63,6 +63,8 @@
   {% endif %}
   {{- block.shopify_attributes -}}
 >
+  {% render 'bb-whatsapp-link', class: 'bb-whatsapp--header' %}
+
   {% if shop.customer_accounts_enabled %}
     {% liquid
       assign account_actions_style = ''

@@ -1,0 +1,53 @@
+{%- doc -%}
+  Promo card used in the desktop mega menu. Content comes from the header menu block settings;
+  empty fields fall back to the translated defaults (bb.mega.*).
+
+  @param {string} variant - 'wee' (plum 60% card) or 'site' (pink-soft 15% card).
+  @param {object} block - The _header-menu block.
+  @param {object} category - The top-level menu link the card belongs to.
+{%- enddoc -%}
+
+{%- liquid
+  assign bs = block.settings
+  if variant == 'wee'
+    assign badge = bs.bb_promo_wee_badge
+    if badge == blank
+      assign badge = 'bb.mega.sixty_badge' | t
+    endif
+    assign heading = bs.bb_promo_wee_heading
+    if heading == blank
+      assign heading = 'bb.mega.sixty_heading' | t
+    endif
+    assign text = bs.bb_promo_wee_text
+    if text == blank
+      assign text = 'bb.mega.sixty_text' | t
+    endif
+    assign url = bs.bb_promo_wee_link | default: '/collections/wee-baby'
+    assign image = bs.bb_promo_wee_image
+  else
+    assign badge = bs.bb_promo_site_badge
+    if badge == blank
+      assign badge = 'bb.mega.fifteen_badge' | t
+    endif
+    if bs.bb_promo_site_heading != blank
+      assign heading = bs.bb_promo_site_heading | replace: '[category]', category.title
+    else
+      assign heading = 'bb.mega.fifteen_heading' | t: title: category.title
+    endif
+    assign text = bs.bb_promo_site_text
+    if text == blank
+      assign text = 'bb.campaign.until' | t
+    endif
+    assign url = bs.bb_promo_site_link | default: category.url
+    assign image = bs.bb_promo_site_image
+  endif
+-%}
+
+<a class="bb-promo bb-promo--{{ variant }}" href="{{ url }}">
+  <span class="bb-pill bb-pill--{% if variant == 'wee' %}sixty{% else %}fifteen{% endif %}">{{ badge }}</span>
+  <span class="bb-promo__heading">{{ heading }}</span>
+  <span class="bb-promo__text">{{ text }}</span>
+  {%- if image != blank -%}
+    {{ image | image_url: width: 480 | image_tag: class: 'bb-promo__image', loading: 'lazy', sizes: '240px', widths: '240, 360, 480', alt: image.alt | default: heading }}
+  {%- endif -%}
+</a>

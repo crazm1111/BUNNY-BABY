@@ -21,6 +21,11 @@
     assign show_compare_price = true
   endif
 
+  assign bb_savings = 0
+  if show_compare_price
+    assign bb_savings = compare_at_price | minus: price
+  endif
+
   if product_resource == blank
     assign price = 1999
   endif
@@ -124,6 +129,10 @@
       endif
     -%}
     {% render 'unit-price', price: unit_price, measurement: selected_variant.unit_price_measurement %}
+  {%- endif -%}
+  {%- if is_product_card and bb_savings > 0 and has_volume_pricing != true -%}
+    {%- assign bb_savings_money = bb_savings | money -%}
+    <span class="bb-you-save">{{ 'bb.card.you_save' | t: amount: bb_savings_money }}</span>
   {%- endif -%}
 </div>
 {%- if has_volume_pricing -%}

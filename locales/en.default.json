@@ -8,6 +8,79 @@
  * ------------------------------------------------------------
  */
 {
+  "bb": {
+    "badge": {
+      "outlet": "OUTLET",
+      "sixty": "60% OFF",
+      "fifteen": "15% OFF"
+    },
+    "campaign": {
+      "ends": "Offers end 30 Nov",
+      "until": "Until 30 Nov",
+      "ends_pill": "Ends 30 Nov",
+      "offers_heading": "Bunny Friday offers",
+      "carousel_subline": "60% off Wee Baby · 15% off everything else · Outlet prices",
+      "view_all_deals": "View all deals"
+    },
+    "card": {
+      "you_save": "You save {{ amount }}"
+    },
+    "announcement": {
+      "previous": "Previous offer",
+      "next": "Next offer",
+      "sixty_message": "Wee Baby products",
+      "sixty_link": "Shop Wee Baby",
+      "fifteen_message": "Everything on the website",
+      "fifteen_link": "Shop now",
+      "outlet_message": "Selected items at our lowest prices",
+      "outlet_link": "Shop the Outlet"
+    },
+    "nav": {
+      "deals": "Bunny Friday deals",
+      "more": "More",
+      "back": "Back",
+      "view_all": "View all {{ title }}",
+      "sections": "{{ count }} sections",
+      "category_strip": "15% off everything here · until 30 Nov",
+      "shop_by_age": "Shop by age",
+      "brands": "Brands",
+      "all_brands": "All brands",
+      "categories": "Categories",
+      "outlet": "Outlet",
+      "open_menu": "Open menu",
+      "close_menu": "Close menu",
+      "main_menu": "Main menu",
+      "show_submenu": "Open {{ title }}"
+    },
+    "drawer": {
+      "sixty_title": "60% off",
+      "sixty_text": "Wee Baby products",
+      "fifteen_title": "15% off",
+      "fifteen_text": "Everything on the website",
+      "outlet_title": "Outlet",
+      "outlet_text": "Selected items at our lowest prices",
+      "sixty_category": "60% off — Wee Baby products in this category",
+      "outlet_category": "Outlet — selected items at our lowest prices"
+    },
+    "mega": {
+      "sixty_badge": "60% OFF",
+      "sixty_heading": "Wee Baby bottles & teats",
+      "sixty_text": "Until 30 Nov",
+      "fifteen_badge": "15% OFF",
+      "fifteen_heading": "Everything in {{ title }}",
+      "shop_now": "Shop now"
+    },
+    "search": {
+      "placeholder": "Search bottles, diapers, brands…",
+      "submit": "Search"
+    },
+    "help": {
+      "whatsapp": "Help on WhatsApp"
+    },
+    "trust": {
+      "line": "Cash on delivery · 100% original"
+    }
+  },
   "bunny_baby": {
     "footer": {
       "about_heading": "About us",
