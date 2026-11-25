@@ -1,0 +1,8 @@
+# Settings for `shopify theme check`.
+extends: theme-check:recommended
+
+# The store only uses Arabic and English. Bunny Baby text (the "bunny_baby" keys)
+# lives in locales/ar.json and locales/en.default.json only. Other languages fall
+# back to English, so this check would flag every other language file.
+MatchingTranslations:
+  enabled: false

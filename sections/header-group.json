@@ -14,31 +14,74 @@
     "header_announcements_9jGBFp": {
       "type": "header-announcements",
       "blocks": {
-        "announcement_BxgCk9": {
+        "announcement_sixty": {
           "type": "_announcement",
           "settings": {
-            "text": "Welcome to our store",
-            "link": "",
-            "font": "var(--font-subheading--family)",
-            "font_size": "0.75rem",
+            "badge_style": "sixty",
+            "badge_text": "",
+            "text": "",
+            "link_label": "",
+            "link": "shopify://collections/wee-baby",
+            "font": "var(--font-body--family)",
+            "font_size": "0.875rem",
             "weight": "",
             "letter_spacing": "normal",
-            "case": "none"
+            "case": "none",
+            "text_color": ""
+          },
+          "blocks": {}
+        },
+        "announcement_fifteen": {
+          "type": "_announcement",
+          "settings": {
+            "badge_style": "fifteen",
+            "badge_text": "",
+            "text": "",
+            "link_label": "",
+            "link": "/collections/all",
+            "font": "var(--font-body--family)",
+            "font_size": "0.875rem",
+            "weight": "",
+            "letter_spacing": "normal",
+            "case": "none",
+            "text_color": ""
+          },
+          "blocks": {}
+        },
+        "announcement_outlet": {
+          "type": "_announcement",
+          "settings": {
+            "badge_style": "outlet",
+            "badge_text": "",
+            "text": "",
+            "link_label": "",
+            "link": "shopify://collections/outlet",
+            "font": "var(--font-body--family)",
+            "font_size": "0.875rem",
+            "weight": "",
+            "letter_spacing": "normal",
+            "case": "none",
+            "text_color": ""
           },
           "blocks": {}
         }
       },
       "block_order": [
-        "announcement_BxgCk9"
+        "announcement_sixty",
+        "announcement_fifteen",
+        "announcement_outlet"
       ],
       "name": "t:names.announcement_bar",
       "settings": {
-        "speed": 5,
-        "section_width": "page-width",
-        "divider_width": 1,
-        "padding-block-start": 15,
-        "padding-block-end": 15,
-        "divider_color": "{{ settings.color_palette.color3 }}"
+        "speed": 6,
+        "section_width": "full-width",
+        "background_color": "#2a1430",
+        "divider_width": 0,
+        "divider_color": "{{ settings.color_palette.color3 }}",
+        "padding-block-start": 0,
+        "padding-block-end": 0,
+        "campaign_end": "2026-11-30",
+        "show_trust": true
       }
     },
     "header_section": {
@@ -58,19 +101,28 @@
           "type": "_header-menu",
           "static": true,
           "settings": {
-            "menu": "main-menu",
+            "menu": "category-menu",
+            "background_color": "{{ settings.color_palette.background }}",
+            "text_color": "",
             "type_font_primary_size": "0.875rem",
             "menu_font_style": "inverse",
             "type_font_primary_link": "body",
             "type_case_primary_link": "none",
-            "menu_style": "featured_products",
+            "menu_style": "featured_collections",
             "featured_products_aspect_ratio": "4 / 5",
             "featured_collections_aspect_ratio": "16 / 9",
             "image_border_radius": 0,
             "navigation_bar": false,
-            "drawer_accordion": false,
+            "background_color_navigation_bar": "{{ settings.color_palette.background }}",
+            "text_color_navigation_bar": "",
+            "drawer_accordion": true,
             "drawer_accordion_expand_first": false,
-            "drawer_dividers": false
+            "drawer_dividers": false,
+            "drawer_divider_color": "",
+            "bb_nav": true,
+            "bb_deals_url": "/collections/all",
+            "bb_outlet_url": "shopify://collections/outlet",
+            "bb_promo_wee_link": "shopify://collections/wee-baby"
           },
           "blocks": {}
         }
@@ -78,7 +130,8 @@
       "settings": {
         "logo_position": "left",
         "menu_position": "left",
-        "menu_row": "top",
+        "menu_row": "bottom",
+        "customer_account_menu": "customer-account-main-menu",
         "show_search": true,
         "search_position": "right",
         "search_row": "top",
@@ -94,10 +147,29 @@
         "enable_sticky_header": "always",
         "divider_width": 0,
         "divider_size": "page-width",
+        "divider_color": "",
         "border_width": 0,
+        "bottom_border_color": "",
+        "actions_display_style": "icon",
+        "actions_font_size": "0.875rem",
+        "actions_font": "body",
+        "actions_text_case": "none",
+        "background_color_top": "",
+        "text_color_top": "",
+        "background_color_bottom": "",
+        "text_color_bottom": "",
+        "bubble_style": "default",
+        "bubble_background_color": "",
+        "bubble_text_color": "",
         "enable_transparent_header_home": false,
+        "home_inverse_logo": false,
+        "text_color_transparent_home": "",
         "enable_transparent_header_product": false,
-        "enable_transparent_header_collection": false
+        "product_inverse_logo": false,
+        "text_color_transparent_product": "",
+        "enable_transparent_header_collection": false,
+        "collection_inverse_logo": false,
+        "text_color_transparent_collection": ""
       }
     }
   },

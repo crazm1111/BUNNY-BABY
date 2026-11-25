@@ -30,5 +30,5 @@
   {%- endif -%}
   {{ block.shopify_attributes }}
 >
-  {{ block_settings.label }}
+  {% render 'bb-text', text: block_settings.label %}
 </a>

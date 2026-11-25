@@ -1,0 +1,30 @@
+{%- doc -%}
+  "Showing X of Y" + progress bar + "Load more products" link (Section Rendering API in bb-plp.js).
+  Without JS the link is a normal ?page=n link.
+
+  @param {object} paginate - Pagination object.
+  @param {object} products - Products on this page.
+  @param {object} section - The main collection section.
+{%- enddoc -%}
+
+{%- liquid
+  assign total = paginate.items
+  assign shown = paginate.current_offset | plus: products.size
+  assign pct = 100
+  if total > 0
+    assign pct = shown | times: 100 | divided_by: total
+  endif
+-%}
+<bb-load-more
+  class="bb-load-more"
+  data-section-id="{{ section.id }}"
+  data-template="{{ 'plp.showing' | t: shown: '[shown]', total: '[total]' | escape }}"
+  data-total="{{ total }}"
+  data-shown="{{ shown }}"
+>
+  <p class="bb-load-more__status" role="status" data-bb-status>{{ 'plp.showing' | t: shown: shown, total: total }}</p>
+  <div class="bb-load-more__bar" aria-hidden="true"><span style="width: {{ pct }}%" data-bb-bar></span></div>
+  {%- if paginate.next -%}
+    <a class="bb-load-more__btn" href="{{ paginate.next.url }}" data-bb-next>{{ 'plp.load_more' | t }}</a>
+  {%- endif -%}
+</bb-load-more>

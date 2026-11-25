@@ -8,6 +8,140 @@
  * ------------------------------------------------------------
  */
 {
+  "plp": {
+    "breadcrumb_home": "Home",
+    "breadcrumb_label": "Breadcrumb",
+    "count": "{{ count }} products",
+    "read_more": "Read more",
+    "read_less": "Show less",
+    "all_prefix": "All {{ title }}",
+    "in_stock": "In stock only",
+    "sort_label": "Sort: {{ option }}",
+    "filters_button": "Filters ({{ count }})",
+    "showing": "Showing {{ shown }} of {{ total }} products",
+    "load_more": "Load more products",
+    "subcategories": "Subcategories",
+    "sort_heading": "Sort by",
+    "close": "Close"
+  },
+  "bb": {
+    "badge": {
+      "outlet": "OUTLET",
+      "sixty": "60% OFF",
+      "fifteen": "15% OFF"
+    },
+    "campaign": {
+      "ends": "Offers end 30 Nov",
+      "until": "Until 30 Nov",
+      "ends_pill": "Ends 30 Nov",
+      "offers_heading": "Bunny Friday offers",
+      "carousel_subline": "60% off Wee Baby · 15% off everything else · Outlet prices",
+      "view_all_deals": "View all deals"
+    },
+    "card": {
+      "you_save": "You save {{ amount }}"
+    },
+    "slideshow": {
+      "previous": "Previous slide",
+      "next": "Next slide"
+    },
+    "announcement": {
+      "previous": "Previous offer",
+      "next": "Next offer",
+      "sixty_message": "Wee Baby products",
+      "sixty_link": "Shop now",
+      "fifteen_message": "Everything sitewide",
+      "fifteen_link": "Shop now",
+      "outlet_message": "Our lowest prices",
+      "outlet_link": "Shop Outlet"
+    },
+    "nav": {
+      "deals": "Bunny Friday deals",
+      "more": "More",
+      "back": "Back",
+      "view_all": "View all {{ title }}",
+      "sections": "{{ count }} sections",
+      "category_strip": "15% off everything here · until 30 Nov",
+      "shop_by_age": "Shop by age",
+      "brands": "Brands",
+      "all_brands": "All brands",
+      "categories": "Categories",
+      "outlet": "Outlet",
+      "open_menu": "Open menu",
+      "close_menu": "Close menu",
+      "main_menu": "Main menu",
+      "show_submenu": "Open {{ title }}"
+    },
+    "drawer": {
+      "sixty_title": "60% off",
+      "sixty_text": "Wee Baby products",
+      "fifteen_title": "15% off",
+      "fifteen_text": "Everything on the website",
+      "outlet_title": "Outlet",
+      "outlet_text": "Selected items at our lowest prices",
+      "sixty_category": "60% off — Wee Baby products in this category",
+      "outlet_category": "Outlet — selected items at our lowest prices"
+    },
+    "mega": {
+      "sixty_badge": "60% OFF",
+      "sixty_heading": "Wee Baby bottles & teats",
+      "sixty_text": "Until 30 Nov",
+      "fifteen_badge": "15% OFF",
+      "fifteen_heading": "Everything in {{ title }}",
+      "shop_now": "Shop now"
+    },
+    "search": {
+      "placeholder": "Search bottles, diapers, brands…",
+      "submit": "Search"
+    },
+    "help": {
+      "whatsapp": "Help on WhatsApp"
+    },
+    "trust": {
+      "line": "Cash on delivery · 100% original"
+    }
+  },
+  "bunny_baby": {
+    "footer": {
+      "about_heading": "About us",
+      "about_text": "At Bunny Baby, we’ve gathered everything you and your little one need, from pregnancy to your baby’s first steps. Safe, carefully selected products to ensure comfort and quality in every detail of your motherhood journey.",
+      "links_heading": "Useful links",
+      "follow_heading": "Follow us"
+    },
+    "home": {
+      "view_all": "View all",
+      "shop_by_stage": "Shop by stage",
+      "stage_0_6": "0-6 months",
+      "stage_6_12": "6-12 months",
+      "stage_1_3": "1-3 years",
+      "stage_mum": "Mum care",
+      "trust_returns": "Easy returns",
+      "trust_delivery": "Fast delivery",
+      "trust_cod": "Cash on delivery",
+      "trust_original": "100% original",
+      "shop_by_need": "Shop by need",
+      "need_feeding": "Feeding",
+      "need_pacifiers": "Pacifiers",
+      "need_shower": "Shower",
+      "need_diapers": "Diapers",
+      "need_breastfeeding": "Breastfeeding",
+      "need_strollers": "Strollers",
+      "need_car_seats": "Car seats",
+      "need_sleeping": "Sleeping",
+      "trusted_brands": "Trusted brands",
+      "blog_heading": "The Mommy Corner ❤︎",
+      "blog_subheading": "Discover articles, tips, and real-life stories to guide you through your motherhood journey",
+      "more_articles": "More articles",
+      "slide_wee_baby": "Bunny Friday: 60% off Wee Baby products",
+      "slide_essentials": "Bunny Friday baby essentials sale",
+      "banner_la_frutta_plus": "La Frutta Plus baby care collection",
+      "banner_baby_gear": "Baby gear special offer",
+      "banner_la_frutta_mum": "La Frutta Mum breastfeeding essentials",
+      "banner_shower": "Shower time",
+      "banner_dry_go": "Dry Go postpartum care",
+      "banner_outlet": "Outlet special discounts"
+    }
+  },
   "accessibility": {
     "account": "Account",
     "active_filters": "Active filters:",

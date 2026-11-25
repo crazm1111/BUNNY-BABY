@@ -25,33 +25,76 @@ export class AnnouncementBar extends Component {
     super.connectedCallback();
 
     this.addEventListener('mouseenter', this.suspend);
-    this.addEventListener('mouseleave', this.resume);
+    this.addEventListener('mouseleave', this.#handlePointerLeave);
+    // Pause while anything inside has keyboard focus (WCAG 2.2.2).
+    this.addEventListener('focusin', this.suspend);
+    this.addEventListener('focusout', this.#handleFocusOut);
     document.addEventListener('visibilitychange', this.#handleVisibilityChange);
+    this.#reducedMotion.addEventListener?.('change', this.#handleMotionChange);
 
     this.play();
   }
 
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this.suspend();
+    document.removeEventListener('visibilitychange', this.#handleVisibilityChange);
+    this.#reducedMotion.removeEventListener?.('change', this.#handleMotionChange);
+  }
+
+  /** @type {MediaQueryList} */
+  #reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
   next() {
     this.current += 1;
+    this.#announce();
   }
 
   previous() {
     this.current -= 1;
+    this.#announce();
   }
+
+  /** Manual navigation: let screen readers hear the new message. */
+  #announce() {
+    this.querySelector('[aria-live]')?.setAttribute('aria-live', 'polite');
+  }
+
+  #handlePointerLeave = () => {
+    if (this.contains(document.activeElement)) return;
+    this.resume();
+  };
+
+  /** @param {FocusEvent} event */
+  #handleFocusOut = (event) => {
+    const next = /** @type {Node|null} */ (event.relatedTarget);
+    if (next && this.contains(next)) return;
+    if (this.matches(':hover')) return;
+    this.resume();
+  };
+
+  #handleMotionChange = () => {
+    if (this.#reducedMotion.matches) {
+      this.suspend();
+    } else {
+      this.paused = false;
+      this.resume();
+    }
+  };
 
   /**
    * Starts automatic slide playback.
    * @param {number} [interval] - The time interval in seconds between slides.
    */
   play(interval = this.autoplayInterval) {
-    if (!this.autoplay) return;
+    if (!this.autoplay || this.#reducedMotion.matches) return;
 
     this.paused = false;
 
     this.#interval = setInterval(() => {
-      if (this.matches(':hover') || document.hidden) return;
+      if (this.matches(':hover') || this.contains(document.activeElement) || document.hidden) return;
 
-      this.next();
+      this.current += 1;
     }, interval);
   }
 
@@ -122,7 +165,7 @@ export class AnnouncementBar extends Component {
   /**
    * Pause the slideshow when the page is hidden.
    */
-  #handleVisibilityChange = () => (document.hidden ? this.pause() : this.resume());
+  #handleVisibilityChange = () => (document.hidden ? this.suspend() : this.resume());
 }
 
 if (!customElements.get('announcement-bar-component')) {

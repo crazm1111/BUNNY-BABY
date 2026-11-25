@@ -80,6 +80,9 @@
 
   capture logo
     content_for 'block', type: '_header-logo', id: 'header-logo'
+    if settings.bb_visible_search
+      render 'bb-header-search', id: section.id
+    endif
   endcapture
 
   capture menu
@@ -337,7 +340,7 @@
 
 <header-component
   id="header-component"
-  class="{{ class }}"
+  class="{{ class }}{% if settings.bb_visible_search %} bb-header--visible-search{% endif %}"
   data-theme-color="rgb({{ section.settings.background_color_top.rgb | default: settings.page_background_color.rgb }})"
   data-bubble-style="{{ section.settings.bubble_style }}"
   {% if transparent %}
@@ -500,6 +503,9 @@
   src="{{ 'header.js' | asset_url }}"
   type="module"
 ></script>
+{% if settings.bb_visible_search %}
+  <script src="{{ 'bb-campaign.js' | asset_url }}" type="module" fetchpriority="low"></script>
+{% endif %}
 
 {% stylesheet %}
   body {

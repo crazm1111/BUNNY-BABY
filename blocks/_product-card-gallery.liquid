@@ -2,7 +2,45 @@
 
 {% capture children %}
   {% unless product == blank %}
-    {%- if product.available == false or product.compare_at_price > product.price -%}
+    {%- liquid
+      # Bunny Friday badge rules (see theme settings → Bunny Friday).
+      assign bb_today = 'now' | date: '%Y-%m-%d'
+      assign campaign_live = false
+      if settings.bb_campaign_on and settings.bb_campaign_end != blank and bb_today <= settings.bb_campaign_end
+        assign campaign_live = true
+      endif
+
+      assign on_sale = false
+      if product.compare_at_price > product.price
+        assign on_sale = true
+      endif
+
+      assign is_outlet = false
+      assign is_sixty = false
+      if campaign_live and product.available
+        assign outlet_handle = settings.bb_outlet_collection | default: 'outlet'
+        assign collection_handles = product.collections | map: 'handle'
+        if collection_handles contains outlet_handle or product.tags contains 'badge:Outlet'
+          assign is_outlet = true
+        endif
+
+        if product.tags contains 'badge:60% OFF'
+          assign is_sixty = true
+        elsif settings.bb_wee_vendor_rule and product.vendor == settings.bb_wee_vendor
+          assign is_sixty = true
+        endif
+      endif
+
+      assign sixty_label = settings.bb_badge_wee_label | strip
+      if sixty_label == blank
+        assign sixty_label = 'bb.badge.sixty' | t
+      endif
+      assign sitewide_label = settings.bb_badge_sitewide_label | strip
+      if sitewide_label == blank
+        assign sitewide_label = 'bb.badge.fifteen' | t
+      endif
+    -%}
+    {%- if product.available == false -%}
       <div
         class="product-badges product-badges--{{ settings.badge_position }}"
         style="
@@ -10,17 +48,33 @@
             --badge-font-family: var(--font-{{ settings.badge_font_family }}--family); --badge-font-weight: var(--font-{{ settings.badge_font_family }}--weight); --badge-text-transform: {{ settings.badge_text_transform }};
         "
       >
-        <div
-          class="
-            product-badges__badge product-badges__badge--rectangle
-            {% if product.available == false %} color-custom-badge-sold-out{% elsif product.compare_at_price > product.price %} color-custom-badge-sale{% endif %}
-          "
-        >
-          {%- if product.available == false -%}
-            {{ 'content.product_badge_sold_out' | t }}
-          {%- elsif product.compare_at_price > product.price -%}
-            {{ 'content.product_badge_sale' | t }}
+        <div class="product-badges__badge product-badges__badge--rectangle color-custom-badge-sold-out">
+          {{ 'content.product_badge_sold_out' | t }}
+        </div>
+      </div>
+    {%- elsif campaign_live -%}
+      {%- if is_outlet or is_sixty or on_sale -%}
+        <div class="product-badges bb-badges">
+          {%- if is_outlet -%}
+            <span class="bb-badge bb-badge--outlet">{{ 'bb.badge.outlet' | t }}</span>
           {%- endif -%}
+          {%- if is_sixty -%}
+            <span class="bb-badge bb-badge--sixty">{{ sixty_label }}</span>
+          {%- elsif is_outlet == false and on_sale -%}
+            <span class="bb-badge bb-badge--fifteen">{{ sitewide_label }}</span>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    {%- elsif on_sale -%}
+      <div
+        class="product-badges product-badges--{{ settings.badge_position }}"
+        style="
+            --badge-border-radius: {{ settings.badge_corner_radius }}px;
+            --badge-font-family: var(--font-{{ settings.badge_font_family }}--family); --badge-font-weight: var(--font-{{ settings.badge_font_family }}--weight); --badge-text-transform: {{ settings.badge_text_transform }};
+        "
+      >
+        <div class="product-badges__badge product-badges__badge--rectangle color-custom-badge-sale">
+          {{ 'content.product_badge_sale' | t }}
         </div>
       </div>
     {%- endif -%}
@@ -31,6 +85,10 @@
 {% endcapture %}
 
 {% render 'card-gallery', children: children %}
+
+{%- if settings.bb_card_vendor and product != blank and product.vendor != blank -%}
+  <p class="bb-card-vendor">{{ product.vendor }}</p>
+{%- endif -%}
 
 {% # Title for the zoomed out grid view %}
 <h3 class="product-grid-view-zoom-out--details">

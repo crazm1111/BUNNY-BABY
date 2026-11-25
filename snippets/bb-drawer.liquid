@@ -1,0 +1,280 @@
+{%- doc -%}
+  Bunny Friday mobile navigation drawer: two-level drill-down (not accordion).
+  Level 1 = offers, shop by age, categories, brands, help. Level 2 = one panel per category.
+  Built from the menu chosen in the header menu block (category-menu).
+
+  @param {object} block - The _header-menu block (settings + menu).
+{%- enddoc -%}
+
+{%- liquid
+  assign bs = block.settings
+  assign menu = bs.menu
+
+  assign bb_today = 'now' | date: '%Y-%m-%d'
+  assign campaign_live = false
+  if settings.bb_campaign_on and settings.bb_campaign_end != blank and bb_today <= settings.bb_campaign_end
+    assign campaign_live = true
+  endif
+
+  assign hidden_keys = bs.bb_drawer_hidden_handles | remove: ' ' | split: ','
+  assign wee_keys = bs.bb_wee_handles | remove: ' ' | split: ','
+  assign offers_keys = bs.bb_offers_handles | remove: ' ' | split: ','
+  assign chip_keys = bs.bb_drawer_brands | remove: ' ' | split: ','
+  assign age_key = bs.bb_age_handle | strip
+  assign brands_key = bs.bb_brands_handle | strip
+  assign outlet_url = bs.bb_outlet_url | default: '/collections/outlet'
+
+  assign age_link = null
+  assign brands_link = null
+  for link in menu.links
+    if link.handle == age_key
+      assign age_link = link
+    elsif link.handle == brands_key
+      assign brands_link = link
+    endif
+  endfor
+
+  assign drawer_id = 'BbDrawer-' | append: block.id
+-%}
+
+{%- capture chevron -%}
+  <svg class="bb-chevron" aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+{%- endcapture -%}
+{%- capture close_button -%}
+  <button type="button" class="bb-drawer__icon-btn button-unstyled" data-bb-drawer-close aria-label="{{ 'bb.nav.close_menu' | t }}">
+    <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+  </button>
+{%- endcapture -%}
+
+<bb-drawer class="bb-drawer">
+  <button
+    type="button"
+    class="header__icon header__icon--menu bb-drawer__open button-unstyled"
+    aria-label="{{ 'bb.nav.open_menu' | t }}"
+    aria-haspopup="dialog"
+    aria-controls="{{ drawer_id }}"
+    aria-expanded="false"
+    data-bb-drawer-open
+  >
+    <span class="svg-wrapper" aria-hidden="true">{{- 'icon-menu.svg' | inline_asset_content -}}</span>
+  </button>
+
+  <dialog id="{{ drawer_id }}" class="bb-drawer__dialog" aria-label="{{ 'bb.nav.main_menu' | t }}">
+    <div class="bb-drawer__viewport" data-bb-drawer-viewport>
+      {%- comment -%} ===== Level 1 ===== {%- endcomment -%}
+      <div class="bb-drawer__panel bb-drawer__panel--root" data-bb-panel="root">
+        <div class="bb-drawer__topbar">
+          <a class="bb-drawer__logo" href="{{ routes.root_url }}">
+            {%- if settings.logo != blank -%}
+              {{ settings.logo | image_url: height: 80 | image_tag: height: 40, alt: shop.name, loading: 'lazy' }}
+            {%- else -%}
+              {{ shop.name }}
+            {%- endif -%}
+          </a>
+          {{ close_button }}
+        </div>
+
+        <form action="{{ routes.search_url }}" method="get" role="search" class="bb-drawer__search">
+          <label class="visually-hidden" for="{{ drawer_id }}-search">{{ 'content.search_input_label' | t }}</label>
+          <input id="{{ drawer_id }}-search" type="search" name="q" autocomplete="off" placeholder="{{ 'bb.search.placeholder' | t }}">
+          <button type="submit" class="bb-drawer__search-btn" aria-label="{{ 'bb.search.submit' | t }}">
+            <span class="svg-wrapper" aria-hidden="true">{{ 'icon-search.svg' | inline_asset_content }}</span>
+          </button>
+        </form>
+
+        {%- if campaign_live -%}
+          <section class="bb-drawer__group" aria-labelledby="{{ drawer_id }}-offers">
+            <div class="bb-drawer__group-head">
+              <h2 id="{{ drawer_id }}-offers" class="bb-drawer__heading">{{ 'bb.campaign.offers_heading' | t }}</h2>
+              <span class="bb-drawer__muted">{{ 'bb.campaign.until' | t }}</span>
+            </div>
+            <ul class="bb-drawer__offers" role="list">
+              <li>
+                <a class="bb-offer bb-offer--plum" href="{{ bs.bb_promo_wee_link | default: '/collections/wee-baby' }}">
+                  <strong>{{ 'bb.drawer.sixty_title' | t }}</strong><span>{{ 'bb.drawer.sixty_text' | t }}</span>
+                </a>
+              </li>
+              <li>
+                <a class="bb-offer bb-offer--pink" href="{{ routes.all_products_collection_url }}">
+                  <strong>{{ 'bb.drawer.fifteen_title' | t }}</strong><span>{{ 'bb.drawer.fifteen_text' | t }}</span>
+                </a>
+              </li>
+              <li>
+                <a class="bb-offer bb-offer--blue" href="{{ outlet_url }}">
+                  <strong>{{ 'bb.drawer.outlet_title' | t }}</strong><span>{{ 'bb.drawer.outlet_text' | t }}</span>
+                </a>
+              </li>
+            </ul>
+          </section>
+        {%- endif -%}
+
+        {%- if age_link != blank and age_link.links != blank -%}
+          <section class="bb-drawer__group" aria-labelledby="{{ drawer_id }}-age">
+            <h2 id="{{ drawer_id }}-age" class="bb-drawer__heading">{{ 'bb.nav.shop_by_age' | t }}</h2>
+            <ul class="bb-drawer__ages" role="list">
+              {%- for child in age_link.links -%}
+                <li><a class="bb-drawer__age" href="{{ child.url }}">{{ child.title }}</a></li>
+              {%- endfor -%}
+            </ul>
+          </section>
+        {%- endif -%}
+
+        <section class="bb-drawer__group" aria-labelledby="{{ drawer_id }}-cats">
+          <h2 id="{{ drawer_id }}-cats" class="bb-drawer__heading">{{ 'bb.nav.categories' | t }}</h2>
+          <ul class="bb-drawer__rows" role="list">
+            {%- for link in menu.links -%}
+              {%- liquid
+                assign url_key = link.url | split: '?' | first | split: '/' | last
+                if link.handle == age_key or link.handle == brands_key
+                  continue
+                endif
+                if hidden_keys contains link.handle or hidden_keys contains url_key
+                  continue
+                endif
+                assign is_offers = false
+                if offers_keys contains link.handle or offers_keys contains url_key
+                  assign is_offers = true
+                endif
+              -%}
+              <li>
+                {%- if link.links != blank -%}
+                  <button
+                    type="button"
+                    class="bb-drawer__row button-unstyled"
+                    data-bb-panel-open="{{ drawer_id }}-p{{ forloop.index }}"
+                    aria-controls="{{ drawer_id }}-p{{ forloop.index }}"
+                    aria-expanded="false"
+                  >
+                    <span class="bb-drawer__row-text">
+                      <span class="bb-drawer__row-title">
+                        {{- link.title -}}
+                        {%- if is_offers -%}<span class="bb-pill bb-pill--outlet-solid bb-pill--mini">{{ 'bb.nav.outlet' | t }}</span>{%- endif -%}
+                      </span>
+                    </span>
+                    {{ chevron }}
+                  </button>
+                {%- else -%}
+                  <a class="bb-drawer__row" href="{{ link.url }}">
+                    <span class="bb-drawer__row-title">{{ link.title }}</span>
+                    {{ chevron }}
+                  </a>
+                {%- endif -%}
+              </li>
+            {%- endfor -%}
+          </ul>
+        </section>
+
+        {%- if brands_link != blank and brands_link.links != blank -%}
+          <section class="bb-drawer__group" aria-labelledby="{{ drawer_id }}-brands">
+            <h2 id="{{ drawer_id }}-brands" class="bb-drawer__heading">{{ 'bb.nav.brands' | t }}</h2>
+            <ul class="bb-drawer__chips" role="list">
+              {%- liquid
+                assign chip_list = chip_keys
+                if chip_keys.size == 0
+                  assign chip_list = brands_link.links | map: 'url'
+                endif
+              -%}
+              {%- for key in chip_list limit: 8 -%}
+                {%- for child in brands_link.links -%}
+                  {%- assign child_key = child.url | split: '?' | first | split: '/' | last -%}
+                  {%- if child_key == key or child.url == key -%}
+                    <li>
+                      <a class="bb-chip{% if child_key == 'wee-baby' %} bb-chip--plum{% endif %}" href="{{ child.url }}">
+                        {{- child.title -}}
+                        {%- if child_key == 'wee-baby' and campaign_live -%}<span class="bb-chip__badge">60%</span>{%- endif -%}
+                      </a>
+                    </li>
+                    {%- break -%}
+                  {%- endif -%}
+                {%- endfor -%}
+              {%- endfor -%}
+              <li><a class="bb-chip bb-chip--outline" href="{{ brands_link.url }}">{{ 'bb.nav.all_brands' | t }}</a></li>
+            </ul>
+          </section>
+        {%- endif -%}
+
+        <div class="bb-drawer__footer">
+          {% render 'bb-whatsapp-link', class: 'bb-whatsapp--button' %}
+          {%- if localization.available_languages.size > 1 -%}
+            {%- form 'localization', class: 'bb-lang' -%}
+              {%- for language in localization.available_languages -%}
+                <button
+                  type="submit"
+                  name="language_code"
+                  value="{{ language.iso_code }}"
+                  lang="{{ language.iso_code }}"
+                  class="bb-lang__btn"
+                  {% if language.iso_code == localization.language.iso_code %}aria-current="true"{% endif %}
+                >
+                  {{- language.endonym_name | capitalize -}}
+                </button>
+              {%- endfor -%}
+            {%- endform -%}
+          {%- endif -%}
+        </div>
+      </div>
+
+      {%- comment -%} ===== Level 2: one panel per category ===== {%- endcomment -%}
+      {%- for link in menu.links -%}
+        {%- liquid
+          assign url_key = link.url | split: '?' | first | split: '/' | last
+          if link.links == blank or link.handle == age_key or link.handle == brands_key
+            continue
+          endif
+          if hidden_keys contains link.handle or hidden_keys contains url_key
+            continue
+          endif
+          assign panel_id = drawer_id | append: '-p' | append: forloop.index
+          assign is_offers = false
+          if offers_keys contains link.handle or offers_keys contains url_key
+            assign is_offers = true
+          endif
+          assign is_wee = false
+          if wee_keys contains link.handle or wee_keys contains url_key
+            assign is_wee = true
+          endif
+        -%}
+        <div class="bb-drawer__panel" id="{{ panel_id }}" data-bb-panel hidden>
+          <div class="bb-drawer__topbar bb-drawer__topbar--sub">
+            <button type="button" class="bb-drawer__back button-unstyled" data-bb-panel-back>
+              <svg class="bb-chevron bb-chevron--back" aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>
+              <span>{{ 'bb.nav.back' | t }}</span>
+            </button>
+            <h2 class="bb-drawer__title" tabindex="-1" data-bb-panel-heading>{{ link.title }}</h2>
+            {{ close_button }}
+          </div>
+
+          {%- if campaign_live -%}
+            <p class="bb-drawer__strip">{{ 'bb.nav.category_strip' | t }}</p>
+            {%- if is_wee -%}
+              <a class="bb-offer bb-offer--plum bb-offer--wide" href="{{ bs.bb_promo_wee_link | default: '/collections/wee-baby' }}">
+                <strong>{{ 'bb.drawer.sixty_title' | t }}</strong><span>{{ 'bb.drawer.sixty_category' | t }}</span>
+              </a>
+            {%- elsif is_offers -%}
+              <a class="bb-offer bb-offer--blue bb-offer--wide" href="{{ outlet_url }}">
+                <strong>{{ 'bb.drawer.outlet_title' | t }}</strong><span>{{ 'bb.drawer.outlet_text' | t }}</span>
+              </a>
+            {%- endif -%}
+          {%- endif -%}
+
+          <ul class="bb-drawer__rows bb-drawer__rows--sub" role="list">
+            <li>
+              <a class="bb-drawer__row bb-drawer__row--sub bb-drawer__row--accent" href="{{ link.url }}">
+                <span class="bb-drawer__row-title">{{ 'bb.nav.view_all' | t: title: link.title }}</span>
+                {{ chevron }}
+              </a>
+            </li>
+            {%- for child in link.links -%}
+              <li>
+                <a class="bb-drawer__row bb-drawer__row--sub" href="{{ child.url }}"{% if child.current %} aria-current="page"{% endif %}>
+                  <span class="bb-drawer__row-title">{{ child.title }}</span>
+                  {{ chevron }}
+                </a>
+              </li>
+            {%- endfor -%}
+          </ul>
+        </div>
+      {%- endfor -%}
+    </div>
+  </dialog>
+</bb-drawer>

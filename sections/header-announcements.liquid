@@ -8,34 +8,74 @@
 
 {% render 'contrast-override', background_color: section.settings.background_color, section_id: section.id %}
 
+{%- liquid
+  assign bb_today = 'now' | date: '%Y-%m-%d'
+  assign show_end_date = false
+  if section.settings.campaign_end != blank and bb_today <= section.settings.campaign_end
+    assign show_end_date = true
+  endif
+
+  assign autoplay = false
+  assign show_arrows = false
+  if section.blocks.size > 1
+    assign autoplay = true
+    assign show_arrows = true
+  endif
+-%}
+
 <div class="section-background color-custom-{{ section.id }}"></div>
 <aside
-  class="announcement-bar spacing-style section section--{{ section.settings.section_width }} color-custom-{{ section.id }}"
+  class="announcement-bar bb-ann spacing-style section section--{{ section.settings.section_width }} color-custom-{{ section.id }}"
   style="{% render 'spacing-padding', settings: section.settings %}; --border-bottom-width: {{ section.settings.divider_width }}px;{% if section.settings.divider_color != blank %} --color-border: {{ section.settings.divider_color }};{% endif %}"
+  aria-label="{{ 'bb.campaign.offers_heading' | t }}"
 >
-  {% liquid
-    assign autoplay = false
-    assign show_arrows = false
-    if section.blocks.size > 1
-      assign autoplay = true
-      assign show_arrows = true
-    endif
-  %}
+  <div class="bb-ann__grid">
+    <p class="bb-ann__aside bb-ann__aside--start">
+      {%- if section.settings.show_trust -%}
+        {{ 'bb.trust.line' | t }}
+      {%- endif -%}
+    </p>
 
-  <announcement-bar-component
-    class="announcement-bar__slider"
-    {% if autoplay == true %}
-      autoplay="{{ section.settings.speed }}" aria-live="polite"
-    {% endif %}
-  >
-    {% if show_arrows %}
-      {% render 'slideshow-arrows', icon_style: 'chevron' %}
-    {% endif %}
+    <announcement-bar-component
+      class="announcement-bar__slider bb-ann__slider"
+      {% if autoplay == true %}
+        autoplay="{{ section.settings.speed }}"
+      {% endif %}
+    >
+      {% if show_arrows %}
+        <button
+          type="button"
+          class="button-unstyled bb-ann__arrow bb-ann__arrow--previous"
+          aria-label="{{ 'bb.announcement.previous' | t }}"
+          on:click="/previous"
+        >
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>
+        </button>
+      {% endif %}
 
-    <div class="announcement-bar__slides">
-      {% content_for 'blocks' %}
-    </div>
-  </announcement-bar-component>
+      <div class="announcement-bar__slides" aria-live="{% if autoplay %}off{% else %}polite{% endif %}">
+        {% content_for 'blocks' %}
+      </div>
+
+      {% if show_arrows %}
+        <button
+          type="button"
+          class="button-unstyled bb-ann__arrow bb-ann__arrow--next"
+          aria-label="{{ 'bb.announcement.next' | t }}"
+          on:click="/next"
+        >
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+        </button>
+      {% endif %}
+    </announcement-bar-component>
+
+    <p class="bb-ann__aside bb-ann__aside--end">
+      {%- if show_end_date -%}
+        <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+        <span>{{ 'bb.campaign.ends' | t }}</span>
+      {%- endif -%}
+    </p>
+  </div>
 </aside>
 
 {% stylesheet %}
@@ -144,8 +184,21 @@
       "label": "t:settings.scroll_speed",
       "min": 2,
       "max": 10,
-      "default": 5,
+      "default": 6,
       "unit": "sec"
+    },
+    {
+      "type": "text",
+      "id": "campaign_end",
+      "label": "Campaign end date (YYYY-MM-DD)",
+      "info": "The \"Offers end\" text hides after this date. Remaining announcements keep showing.",
+      "default": "2026-11-30"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_trust",
+      "label": "Show \"Cash on delivery · 100% original\" (desktop)",
+      "default": true
     },
     {
       "type": "header",

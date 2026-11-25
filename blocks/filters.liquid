@@ -200,8 +200,32 @@
             {% if block_settings.enable_filtering %}
               {% assign total_active_values = 0 %}
 
+              {%- liquid
+                assign bb_order = block_settings.bb_filter_order | remove: ' ' | split: ','
+                assign bb_idx = ''
+                for key in bb_order
+                  for f in filters
+                    if f.param_name == key
+                      assign bb_idx = bb_idx | append: forloop.index0 | append: ','
+                    endif
+                  endfor
+                endfor
+                for f in filters
+                  unless bb_order contains f.param_name
+                    assign bb_idx = bb_idx | append: forloop.index0 | append: ','
+                  endunless
+                endfor
+                assign bb_idx = bb_idx | split: ','
+                assign bb_stock_filter = null
+              -%}
               {% capture rendered_filters %}
-                {%- for filter in filters -%}
+                {%- for i in bb_idx -%}
+                  {%- assign n = i | plus: 0 -%}
+                  {%- assign filter = filters[n] -%}
+                  {%- if block_settings.bb_stock_checkbox and filter.param_name == 'filter.v.availability' -%}
+                    {%- assign bb_stock_filter = filter -%}
+                    {%- continue -%}
+                  {%- endif -%}
                   {% case filter.type %}
                     {% when 'price_range' %}
                       {%- liquid
@@ -257,6 +281,22 @@
                   {{ rendered_filters }}
                 {% endif %}
               </div>
+
+              {%- if bb_stock_filter != null -%}
+                {%- assign bb_in_stock = bb_stock_filter.values | where: 'value', '1' | first -%}
+                {%- if bb_in_stock != blank -%}
+                  <label class="bb-stock-toggle{% if bb_in_stock.active %} is-active{% endif %}">
+                    <input
+                      type="checkbox"
+                      name="{{ bb_in_stock.param_name }}"
+                      value="{{ bb_in_stock.value }}"
+                      {% if bb_in_stock.active %}checked{% endif %}
+                      on:change="/updateFilters"
+                    >
+                    <span>{{ 'plp.in_stock' | t }}</span>
+                  </label>
+                {%- endif -%}
+              {%- endif -%}
 
               {% if block_settings.filter_style == 'horizontal' %}
                 <facet-remove-component
@@ -403,6 +443,67 @@
 {% else %}
   <div></div>
 {% endif %}
+
+{%- if block_settings.bb_mobile_bar and block_settings.enable_filtering -%}
+  {%- liquid
+    assign bb_sort_name = ''
+    for option in results.sort_options
+      if option.value == sort_by
+        assign bb_sort_name = option.name
+      endif
+    endfor
+    assign bb_base = results_url | split: '?' | first
+    assign bb_params = ''
+    for filter in filters
+      if filter.type == 'price_range'
+        if filter.min_value.value != null
+          assign bb_params = bb_params | append: '&' | append: filter.min_value.param_name | append: '=' | append: filter.min_value.value
+        endif
+        if filter.max_value.value != null
+          assign bb_params = bb_params | append: '&' | append: filter.max_value.param_name | append: '=' | append: filter.max_value.value
+        endif
+      else
+        for v in filter.active_values
+          assign enc = v.value | url_encode
+          assign bb_params = bb_params | append: '&' | append: v.param_name | append: '=' | append: enc
+        endfor
+      endif
+    endfor
+  -%}
+  <div class="bb-plp-bar" data-bb-plp-bar>
+    <button type="button" class="bb-plp-bar__btn bb-plp-bar__btn--filters" on:click="#filters-drawer/open" aria-haspopup="dialog">
+      {{- 'plp.filters_button' | t: count: total_active_values -}}
+    </button>
+    {%- if block_settings.enable_sorting -%}
+      <button type="button" class="bb-plp-bar__btn bb-plp-bar__btn--sort" aria-haspopup="dialog" aria-controls="BbSortDialog-{{ section.id }}" data-bb-sort-open>
+        {{- 'plp.sort_label' | t: option: bb_sort_name -}}
+      </button>
+    {%- endif -%}
+  </div>
+  {%- if block_settings.enable_sorting -%}
+    <dialog class="bb-sort-sheet" id="BbSortDialog-{{ section.id }}" aria-labelledby="BbSortHeading-{{ section.id }}">
+      <div class="bb-sort-sheet__head">
+        <h2 class="bb-sort-sheet__title" id="BbSortHeading-{{ section.id }}">{{ 'plp.sort_heading' | t }}</h2>
+        <button type="button" class="bb-sort-sheet__close button-unstyled" data-bb-sort-close aria-label="{{ 'plp.close' | t }}">
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+      </div>
+      <ul class="bb-sort-sheet__list" role="list">
+        {%- for option in results.sort_options -%}
+          <li>
+            <a
+              class="bb-sort-sheet__option"
+              href="{{ bb_base }}?sort_by={{ option.value }}{{ bb_params }}"
+              {% if option.value == sort_by %}aria-current="true"{% endif %}
+            >
+              {{- option.name -}}
+            </a>
+          </li>
+        {%- endfor -%}
+      </ul>
+    </dialog>
+  {%- endif -%}
+{%- endif -%}
 
 {% if block_settings.enable_filtering %}
   <theme-drawer
@@ -1305,6 +1406,25 @@
   "name": "t:names.filters",
   "tag": null,
   "settings": [
+    {
+      "type": "text",
+      "id": "bb_filter_order",
+      "label": "Filter order",
+      "info": "Comma-separated filter parameter names. Filters not listed follow in the app's order.",
+      "default": "filter.p.m.custom.offer,filter.p.tag,filter.p.vendor,filter.p.m.custom.age,filter.v.price,filter.p.product_type,filter.v.availability"
+    },
+    {
+      "type": "checkbox",
+      "id": "bb_stock_checkbox",
+      "label": "Show availability as an \"In stock only\" checkbox",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "bb_mobile_bar",
+      "label": "Mobile bottom bar (Filters + Sort)",
+      "default": true
+    },
     {
       "type": "checkbox",
       "id": "enable_filtering",

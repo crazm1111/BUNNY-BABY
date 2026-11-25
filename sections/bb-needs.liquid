@@ -1,0 +1,105 @@
+<div
+  class="section section--page-width bb-section"
+  style="--bb-pad-top: {{ section.settings.padding_top }}px; --bb-pad-bottom: {{ section.settings.padding_bottom }}px;"
+>
+  <div class="bb-needs">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="bb-heading">{% render 'bb-text', text: section.settings.heading %}</h2>
+    {%- endif -%}
+    <ul class="bb-needs__grid">
+      {%- for block in section.blocks -%}
+        <li class="bb-needs__item" {{ block.shopify_attributes }}>
+          <a href="{{ block.settings.collection.url | default: routes.all_products_collection_url }}">
+            {%- if block.settings.image != blank -%}
+              {{
+                block.settings.image
+                | image_url: width: 300
+                | image_tag: class: 'bb-needs__img', widths: '150, 220, 300', sizes: '(min-width: 990px) 140px, 22vw', alt: '', loading: 'lazy'
+              }}
+            {%- elsif block.settings.collection.featured_image != blank -%}
+              {{
+                block.settings.collection.featured_image
+                | image_url: width: 300
+                | image_tag: class: 'bb-needs__img', widths: '150, 220, 300', sizes: '(min-width: 990px) 140px, 22vw', alt: '', loading: 'lazy'
+              }}
+            {%- endif -%}
+            <span class="bb-needs__label">
+              {%- if block.settings.label != blank -%}
+                {% render 'bb-text', text: block.settings.label %}
+              {%- else -%}
+                {{ block.settings.collection.title }}
+              {%- endif -%}
+            </span>
+          </a>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Shop by need",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "bunny_baby.home.shop_by_need",
+      "info": "Text starting with bunny_baby. is translated from the theme language files (Arabic and English). Type your own text to show it in every language."
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 16
+    }
+  ],
+  "blocks": [
+    {
+      "type": "need",
+      "name": "Category tile",
+      "limit": 16,
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "Leave empty to use the collection image."
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "info": "Leave empty to use the collection name."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Shop by need",
+      "blocks": [{ "type": "need" }, { "type": "need" }, { "type": "need" }, { "type": "need" }]
+    }
+  ]
+}
+{% endschema %}
