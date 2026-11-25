@@ -6,11 +6,15 @@
 {%- liquid
   assign bb_product = closest.product
   assign bb_mf = bb_product.metafields.custom
-  assign bb_age = bb_mf.age.value | join: ', '
-  assign bb_color = bb_mf.color.value | join: ', '
-  assign bb_material = bb_mf.material.value | join: ', '
-  assign bb_kind = bb_mf.product_kind.value | join: ', '
-  assign bb_features = bb_mf.features.value | join: ', '
+  assign bb_sep = ', '
+  if request.locale.iso_code == 'ar'
+    assign bb_sep = '، '
+  endif
+  assign bb_age = bb_mf.age.value | join: bb_sep
+  assign bb_color = bb_mf.color.value | join: bb_sep
+  assign bb_material = bb_mf.material.value | join: bb_sep
+  assign bb_kind = bb_mf.product_kind.value | join: bb_sep
+  assign bb_features = bb_mf.features.value | join: bb_sep
   assign bb_brand = ''
   if block.settings.show_brand
     assign bb_brand = bb_product.vendor

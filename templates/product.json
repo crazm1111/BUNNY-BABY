@@ -307,7 +307,7 @@
               "type": "bb-product-highlights",
               "settings": {
                 "show_heading": false,
-                "show_text": true,
+                "show_text": false,
                 "max_items": 4,
                 "padding-block-start": 4,
                 "padding-block-end": 4
