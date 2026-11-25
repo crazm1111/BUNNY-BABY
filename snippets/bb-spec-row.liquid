@@ -2,11 +2,12 @@
   One row of the specifications table.
 
   @param {string} icon - Icon name for bb-lucide.
-  @param {string} label - Translation key for the row label.
+  @param {string} label - Translation key for the row label, or the label itself when raw_label is true.
   @param {string} value - Row value.
+  @param {boolean} [raw_label] - Print the label as given instead of translating it.
 {%- enddoc -%}
 <div class="bb-specs__row">
   {%- render 'bb-lucide', name: icon -%}
-  <dt>{{ label | t }}</dt>
+  <dt>{% if raw_label %}{{ label | escape }}{% else %}{{ label | t }}{% endif %}</dt>
   <dd>{{ value | escape }}</dd>
 </div>

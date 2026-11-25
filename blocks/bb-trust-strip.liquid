@@ -13,7 +13,7 @@
   endfor
 -%}
 {%- if bb_items != blank -%}
-  <ul class="bb-trust spacing-style" role="list" style="{% render 'spacing-style', settings: block.settings %}" {{ block.shopify_attributes }}>
+  <ul class="bb-pdp-trust spacing-style" role="list" style="{% render 'spacing-style', settings: block.settings %}" {{ block.shopify_attributes }}>
     {%- for i in (1..3) -%}
       {%- assign t_id = 'text_' | append: i -%}
       {%- assign i_id = 'icon_' | append: i -%}
@@ -25,9 +25,19 @@
 {%- endif -%}
 
 {% stylesheet %}
-  .bb-trust { list-style: none; margin: 0; padding: 12px 0; display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 0.9em; }
-  .bb-trust li { display: flex; align-items: center; gap: 6px; }
-  .bb-trust .bb-icon { width: 18px; height: 18px; opacity: 0.8; }
+  .bb-pdp-trust {
+    list-style: none; margin: 0; padding: 12px 16px; border-radius: 14px;
+    background: #fdeef5;
+    display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 8px;
+    align-items: center; justify-items: center; text-align: center; font-size: 0.9em;
+  }
+  .bb-pdp-trust li { display: flex; align-items: center; justify-content: center; gap: 6px; }
+  .bb-pdp-trust .bb-icon { flex: 0 0 18px; width: 18px; height: 18px; color: #c2185b; }
+  @media screen and (max-width: 749px) {
+    .bb-pdp-trust { padding: 12px 8px; font-size: 0.8em; }
+    .bb-pdp-trust li { flex-direction: column; gap: 4px; }
+    .bb-pdp-trust .bb-icon { width: 20px; height: 20px; }
+  }
 {% endstylesheet %}
 
 {% schema %}
