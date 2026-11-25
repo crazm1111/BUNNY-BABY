@@ -1,0 +1,12 @@
+{%- doc -%}
+  One row of the specifications table.
+
+  @param {string} icon - Icon name for bb-lucide.
+  @param {string} label - Translation key for the row label.
+  @param {string} value - Row value.
+{%- enddoc -%}
+<div class="bb-specs__row">
+  {%- render 'bb-lucide', name: icon -%}
+  <dt>{{ label | t }}</dt>
+  <dd>{{ value | escape }}</dd>
+</div>

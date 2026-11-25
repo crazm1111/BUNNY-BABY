@@ -1,0 +1,22 @@
+{%- doc -%}
+  A heading whose text can be a translation key (bunny_baby.…), so it shows in
+  the shopper's language. Used for "You may also like".
+{%- enddoc -%}
+{%- assign bb_t = block.settings.text | strip -%}
+{%- if bb_t != blank -%}
+  <h2 class="bb-heading {{ block.settings.type_preset }} spacing-style" style="{% render 'spacing-style', settings: block.settings %}" {{ block.shopify_attributes }}>{% render 'bb-text', text: bb_t %}</h2>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "BB heading",
+  "tag": null,
+  "settings": [
+    { "type": "text", "id": "text", "label": "Text or translation key", "default": "bunny_baby.product.you_may_also_like" },
+    { "type": "select", "id": "type_preset", "label": "Style", "default": "h4", "options": [{ "value": "h2", "label": "H2" }, { "value": "h3", "label": "H3" }, { "value": "h4", "label": "H4" }, { "value": "h5", "label": "H5" }] },
+    { "type": "range", "id": "padding-block-start", "label": "t:settings.top", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 },
+    { "type": "range", "id": "padding-block-end", "label": "t:settings.bottom", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 }
+  ],
+  "presets": [{ "name": "BB heading" }]
+}
+{% endschema %}

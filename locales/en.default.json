@@ -102,6 +102,397 @@
     }
   },
   "bunny_baby": {
+    "product": {
+      "highlights_heading": "Why parents choose it",
+      "specs_heading": "Specifications",
+      "spec_age": "Age",
+      "spec_color": "Colour",
+      "spec_material": "Material",
+      "spec_type": "Type",
+      "spec_features": "Features",
+      "spec_brand": "Brand",
+      "in_the_box": "What's in the box",
+      "care": "Care and cleaning",
+      "safety": "Safety",
+      "faq": "Questions and answers",
+      "in_stock": "In stock",
+      "available_to_order": "Available to order",
+      "out_of_stock": "Out of stock",
+      "you_may_also_like": "You may also like",
+      "trust_delivery": "Delivery across Egypt",
+      "trust_cod": "Cash on delivery",
+      "trust_original": "Original brand products"
+    },
+    "highlights": {
+      "air_system": {
+        "label": "Air system",
+        "text": "Air system keeps the teat soft and in shape"
+      },
+      "anti_colic": {
+        "label": "Anti-colic",
+        "text": "Anti-colic design to reduce swallowed air"
+      },
+      "anti_slip": {
+        "label": "Anti-slip base",
+        "text": "Anti-slip base"
+      },
+      "baby_size": {
+        "label": "Baby-sized",
+        "text": "Small size for baby nails"
+      },
+      "bottle_to_cup": {
+        "label": "Bottle to cup",
+        "text": "Helps the move from bottle to cup"
+      },
+      "bpa_free": {
+        "label": "BPA-free",
+        "text": "Made from BPA-free materials"
+      },
+      "bright_colours": {
+        "label": "Bright colours",
+        "text": "Bright colours that are easy to spot"
+      },
+      "brush_included": {
+        "label": "Brush included",
+        "text": "Vent cleaning brush in the box"
+      },
+      "case": {
+        "label": "Storage case",
+        "text": "Case for storage or sterilising"
+      },
+      "chew_resistant": {
+        "label": "Chew-resistant",
+        "text": "Resists chewing and pulling"
+      },
+      "clip": {
+        "label": "Click-lock clip",
+        "text": "Clips onto clothes with a click-lock"
+      },
+      "cover": {
+        "label": "Hygienic cover",
+        "text": "Comes with a hygienic cover"
+      },
+      "curved_blades": {
+        "label": "Curved blades",
+        "text": "Curved blades for easy trimming"
+      },
+      "divided": {
+        "label": "Divided sections",
+        "text": "Separate sections for different foods"
+      },
+      "easy_assemble": {
+        "label": "Easy to assemble",
+        "text": "Quick to put together and clean"
+      },
+      "easy_use": {
+        "label": "Easy to use",
+        "text": "Practical and easy to use"
+      },
+      "ergonomic_grip": {
+        "label": "Easy to hold",
+        "text": "Ergonomic shape that's easy to hold"
+      },
+      "flow_control": {
+        "label": "Controlled flow",
+        "text": "You control the water flow"
+      },
+      "food_grade_silicone": {
+        "label": "Food-grade silicone",
+        "text": "Flexible food-grade silicone"
+      },
+      "four_bottles": {
+        "label": "4 bottles",
+        "text": "Two 150 ml and two 250 ml bottles"
+      },
+      "freezer_safe": {
+        "label": "Freezer-safe",
+        "text": "Safe for the freezer"
+      },
+      "fridge_cool": {
+        "label": "Fridge-cooling",
+        "text": "Chill in the fridge for extra soothing"
+      },
+      "gel_absorb": {
+        "label": "Gel layer",
+        "text": "Gel layer absorbs milk quickly"
+      },
+      "gift": {
+        "label": "Gift-ready set",
+        "text": "A ready set to give"
+      },
+      "glass_bottle": {
+        "label": "Glass bottle",
+        "text": "Includes a heat-resistant glass bottle"
+      },
+      "glow": {
+        "label": "Glows in the dark",
+        "text": "Glows in the dark for night feeds"
+      },
+      "grasping": {
+        "label": "Easy to grasp",
+        "text": "Helps practise grasping"
+      },
+      "handles": {
+        "label": "Easy-grip handles",
+        "text": "Handles help your baby hold it alone"
+      },
+      "hard_case": {
+        "label": "Hard case",
+        "text": "Stores in a hard case"
+      },
+      "hard_spout": {
+        "label": "Hard spout",
+        "text": "Hard PP spout"
+      },
+      "hygienic_pack": {
+        "label": "Hygienic pack",
+        "text": "Hygienic packaging"
+      },
+      "keeps_clean": {
+        "label": "Keeps it clean",
+        "text": "Keeps the pacifier off the floor"
+      },
+      "keeps_dry": {
+        "label": "Keeps you dry",
+        "text": "Helps keep you dry"
+      },
+      "leak_proof": {
+        "label": "Leak-proof lock",
+        "text": "Leak-proof lock"
+      },
+      "liquid_solid": {
+        "label": "Liquid or solid",
+        "text": "For liquid or solid food"
+      },
+      "long_handle": {
+        "label": "Long handle",
+        "text": "Long handle for better control"
+      },
+      "manual": {
+        "label": "No batteries",
+        "text": "Manual, no batteries needed"
+      },
+      "measure": {
+        "label": "ml markings",
+        "text": "Clear ml markings"
+      },
+      "no_handle": {
+        "label": "No-handle design",
+        "text": "No handle, so no tapping noise at night"
+      },
+      "no_sharp": {
+        "label": "No sharp edges",
+        "text": "No sharp or hard edges"
+      },
+      "nose_free": {
+        "label": "Nose-free shape",
+        "text": "Shape leaves room around the nose"
+      },
+      "one_hand": {
+        "label": "One-handed",
+        "text": "Controlled with one hand"
+      },
+      "one_hand_lid": {
+        "label": "One-click lid",
+        "text": "Opens and closes with one hand"
+      },
+      "one_piece": {
+        "label": "One-piece silicone",
+        "text": "Made from one piece of silicone"
+      },
+      "orthodontic": {
+        "label": "Orthodontic teat",
+        "text": "Angled orthodontic silicone teat"
+      },
+      "pairs_pack": {
+        "label": "Packed in pairs",
+        "text": "Packed in pairs for hygiene"
+      },
+      "ph_balanced": {
+        "label": "pH-balanced",
+        "text": "pH-balanced for sensitive skin"
+      },
+      "placemat": {
+        "label": "Built-in placemat",
+        "text": "Built-in placemat base"
+      },
+      "pocket": {
+        "label": "Food-catching pocket",
+        "text": "Front pocket catches dropped food"
+      },
+      "portable": {
+        "label": "On the go",
+        "text": "Easy to pack for outings"
+      },
+      "pure_cotton": {
+        "label": "100% cotton",
+        "text": "Made of 100% pure cotton"
+      },
+      "ribbed_grip": {
+        "label": "Anti-slip grip",
+        "text": "Ribbed anti-slip handle"
+      },
+      "roll_up": {
+        "label": "Rolls up",
+        "text": "Rolls up to save space in your bag"
+      },
+      "round_teat": {
+        "label": "Round teat",
+        "text": "Round teat shape"
+      },
+      "safety_bud": {
+        "label": "Safety shape",
+        "text": "Shaped not to go deep into the ear"
+      },
+      "self_feeding": {
+        "label": "Self-feeding",
+        "text": "A first step to eating alone"
+      },
+      "silicone": {
+        "label": "Soft silicone",
+        "text": "Soft, high-quality silicone"
+      },
+      "silicone_100": {
+        "label": "100% silicone",
+        "text": "Made of 100% silicone"
+      },
+      "silicone_funnel": {
+        "label": "Silicone funnel",
+        "text": "Comfortable silicone funnel"
+      },
+      "silicone_spout": {
+        "label": "Soft silicone spout",
+        "text": "Flexible silicone spout"
+      },
+      "silicone_teat": {
+        "label": "Soft silicone teat",
+        "text": "Soft, flexible silicone teat"
+      },
+      "silicone_tip_spoon": {
+        "label": "Soft silicone tip",
+        "text": "Silicone tip is gentle on the mouth"
+      },
+      "size_by_age": {
+        "label": "Size by age",
+        "text": "Pick the size by your baby's age"
+      },
+      "slow_flow_s1": {
+        "label": "Slow flow, size 1",
+        "text": "Size 1 slow-flow teat for 0–6 months"
+      },
+      "snap_spoon": {
+        "label": "Snap-in spoon",
+        "text": "Snap-in spoon stays clean"
+      },
+      "soft_absorbent": {
+        "label": "Soft & absorbent",
+        "text": "Soft and highly absorbent"
+      },
+      "soft_tip": {
+        "label": "Soft silicone tip",
+        "text": "Soft silicone tip, gentle on the nose"
+      },
+      "soft_when_wet": {
+        "label": "Soft when wet",
+        "text": "Turns soft again as soon as it's wet"
+      },
+      "spare_teat_sizes": {
+        "label": "Spare teats by age",
+        "text": "Size 2 and 3 teats sold separately as your baby grows"
+      },
+      "spare_tips": {
+        "label": "Spare tips",
+        "text": "Spare tips included"
+      },
+      "spill_proof": {
+        "label": "Non-spill",
+        "text": "Non-spill design"
+      },
+      "sponge_tip": {
+        "label": "Sponge tip",
+        "text": "Sponge-tipped bottle brush"
+      },
+      "spoon_fork": {
+        "label": "Spoon + fork",
+        "text": "Spoon and fork in one piece"
+      },
+      "spoon_included": {
+        "label": "Spoon included",
+        "text": "Spoon included"
+      },
+      "sterile": {
+        "label": "Sterile",
+        "text": "Sterile packaging"
+      },
+      "storage_case": {
+        "label": "Doubles as storage",
+        "text": "Closes into a storage case"
+      },
+      "straw": {
+        "label": "Silicone straw",
+        "text": "Soft silicone straw"
+      },
+      "symmetrical": {
+        "label": "Symmetrical teat",
+        "text": "Symmetrical silicone teat"
+      },
+      "teat_brush": {
+        "label": "Teat brush",
+        "text": "Includes a brush for teats"
+      },
+      "teat_vents": {
+        "label": "Steady flow",
+        "text": "Vents in the teat keep milk flowing steadily"
+      },
+      "teether_section": {
+        "label": "Teether section",
+        "text": "Teether section soothes gums while eating"
+      },
+      "textured": {
+        "label": "Massage texture",
+        "text": "Ribbed surface massages gums"
+      },
+      "three_pack": {
+        "label": "3 in the pack",
+        "text": "Three in one pack"
+      },
+      "two_in_one": {
+        "label": "2-in-1",
+        "text": "Use with the teat or the cup tip"
+      },
+      "two_pack": {
+        "label": "2 in the pack",
+        "text": "Two in one pack"
+      },
+      "ultra_thin": {
+        "label": "Ultra-thin",
+        "text": "Ultra-thin silicone"
+      },
+      "vent_shield": {
+        "label": "Ventilated shield",
+        "text": "Air holes in the shield help keep skin dry"
+      },
+      "vent_tube": {
+        "label": "Vent tube",
+        "text": "Vent tube keeps air away from the milk"
+      },
+      "water_filled": {
+        "label": "Water-filled",
+        "text": "Filled with drinking water"
+      },
+      "wide_neck": {
+        "label": "Wide neck",
+        "text": "Wide neck for easy filling and cleaning"
+      },
+      "wipe_clean": {
+        "label": "Wipe clean",
+        "text": "Wipes or washes clean after meals"
+      },
+      "write_label": {
+        "label": "Write-on label",
+        "text": "Label to write the date"
+      }
+    },
     "footer": {
       "about_heading": "About us",
       "about_text": "At Bunny Baby, we’ve gathered everything you and your little one need, from pregnancy to your baby’s first steps. Safe, carefully selected products to ensure comfort and quality in every detail of your motherhood journey.",

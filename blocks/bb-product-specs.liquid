@@ -1,0 +1,66 @@
+{%- doc -%}
+  Specifications table built from product metafields (age, colour, material,
+  type, features) and the vendor. Rows with no value are left out; the whole
+  block is hidden when no row has a value.
+{%- enddoc -%}
+{%- liquid
+  assign bb_product = closest.product
+  assign bb_mf = bb_product.metafields.custom
+  assign bb_age = bb_mf.age.value | join: ', '
+  assign bb_color = bb_mf.color.value | join: ', '
+  assign bb_material = bb_mf.material.value | join: ', '
+  assign bb_kind = bb_mf.product_kind.value | join: ', '
+  assign bb_features = bb_mf.features.value | join: ', '
+  assign bb_brand = ''
+  if block.settings.show_brand
+    assign bb_brand = bb_product.vendor
+  endif
+  capture bb_rows
+    if bb_brand != blank
+      render 'bb-spec-row', icon: 'badge-check', label: 'bunny_baby.product.spec_brand', value: bb_brand
+    endif
+    if bb_kind != blank
+      render 'bb-spec-row', icon: 'tag', label: 'bunny_baby.product.spec_type', value: bb_kind
+    endif
+    if bb_age != blank
+      render 'bb-spec-row', icon: 'baby', label: 'bunny_baby.product.spec_age', value: bb_age
+    endif
+    if bb_material != blank
+      render 'bb-spec-row', icon: 'layers', label: 'bunny_baby.product.spec_material', value: bb_material
+    endif
+    if bb_color != blank
+      render 'bb-spec-row', icon: 'palette', label: 'bunny_baby.product.spec_color', value: bb_color
+    endif
+    if bb_features != blank
+      render 'bb-spec-row', icon: 'sparkle', label: 'bunny_baby.product.spec_features', value: bb_features
+    endif
+  endcapture
+-%}
+{%- if bb_rows != blank -%}
+  <div class="bb-specs spacing-style" style="{% render 'spacing-style', settings: block.settings %}" {{ block.shopify_attributes }}>
+    <h2 class="bb-pdp-heading">{{ 'bunny_baby.product.specs_heading' | t }}</h2>
+    <dl class="bb-specs__list">{{ bb_rows }}</dl>
+  </div>
+{%- endif -%}
+
+{% stylesheet %}
+  .bb-specs__list { margin: 0; display: grid; border-top: 1px solid rgb(var(--color-foreground-rgb, 0 0 0) / 0.1); }
+  .bb-specs__row { display: grid; grid-template-columns: 24px minmax(90px, 35%) 1fr; gap: 10px; align-items: center; padding: 10px 0; border-bottom: 1px solid rgb(var(--color-foreground-rgb, 0 0 0) / 0.1); }
+  .bb-specs__row .bb-icon { width: 18px; height: 18px; opacity: 0.7; }
+  .bb-specs__row dt { font-weight: 600; margin: 0; }
+  .bb-specs__row dd { margin: 0; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "BB specifications",
+  "tag": null,
+  "settings": [
+    { "type": "paragraph", "content": "Reads custom.age, color, material, product_kind and features. Empty rows are hidden." },
+    { "type": "checkbox", "id": "show_brand", "label": "Show brand row", "default": true },
+    { "type": "range", "id": "padding-block-start", "label": "t:settings.top", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 },
+    { "type": "range", "id": "padding-block-end", "label": "t:settings.bottom", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 }
+  ],
+  "presets": [{ "name": "BB specifications", "category": "t:categories.product" }]
+}
+{% endschema %}

@@ -22,8 +22,9 @@
       endif
     else
       if inventory_policy == 'continue'
-        assign status = 'in_stock'
-        assign translation_key = 'content.inventory_in_stock'
+        # Bunny Baby: zero stock but still sold, so say it can be ordered
+        assign status = 'backorder'
+        assign translation_key = 'bunny_baby.product.available_to_order'
       else
         assign status = 'out_of_stock'
         assign translation_key = 'content.inventory_out_of_stock'
@@ -101,6 +102,10 @@
 
   .product-inventory__icon-in_stock {
     color: var(--color-instock);
+  }
+
+  .product-inventory__icon-backorder {
+    color: var(--color-lowstock);
   }
 
   .product-inventory__icon-out_of_stock {
