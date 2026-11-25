@@ -5,12 +5,11 @@
 {%- enddoc -%}
 {%- liquid
   assign bb_mf = closest.product.metafields.custom
-  assign bb_box = bb_mf.in_the_box.value | strip
-  assign bb_care = bb_mf.care.value | strip
-  assign bb_safety = bb_mf.safety.value | strip
-  assign bb_faq = bb_mf.faq.value | strip
-  assign bb_nl = '
-'
+  assign bb_box = bb_mf.in_the_box.value | strip | newline_to_br
+  assign bb_care = bb_mf.care.value | strip | newline_to_br
+  assign bb_safety = bb_mf.safety.value | strip | newline_to_br
+  assign bb_faq = bb_mf.faq.value | strip | newline_to_br
+  assign bb_nl = '<br />'
 -%}
 {%- if bb_box != blank or bb_care != blank or bb_safety != blank or bb_faq != blank -%}
   <div class="bb-info spacing-style" style="{% render 'spacing-style', settings: block.settings %}" {{ block.shopify_attributes }}>
