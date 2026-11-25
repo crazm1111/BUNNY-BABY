@@ -1,78 +1,20 @@
-{%- doc -%}
-  Collapsible product information from metafields: what's in the box, care,
-  safety and questions. Each line of a metafield becomes a list item; in the
-  FAQ, lines alternate question then answer. Sections with no text are left out.
-{%- enddoc -%}
 {%- liquid
   assign bb_mf = closest.product.metafields.custom
   assign bb_box = bb_mf.in_the_box.value | strip | newline_to_br
-  assign bb_care = bb_mf.care.value | strip | newline_to_br
-  assign bb_safety = bb_mf.safety.value | strip | newline_to_br
-  assign bb_faq = bb_mf.faq.value | strip | newline_to_br
   assign bb_nl = '<br />'
 -%}
-{%- if bb_box != blank or bb_care != blank or bb_safety != blank or bb_faq != blank -%}
-  <div class="bb-info spacing-style" style="{% render 'spacing-style', settings: block.settings %}" {{ block.shopify_attributes }}>
-    {%- if bb_box != blank -%}
-      <details class="bb-info__item"{% if block.settings.open_first %} open{% endif %}>
-        <summary>{% render 'bb-lucide', name: 'package' %}<span>{{ 'bunny_baby.product.in_the_box' | t }}</span></summary>
-        <ul class="bb-info__list">{% assign bb_ls = bb_box | split: bb_nl %}{% for bb_l in bb_ls %}{% assign bb_s = bb_l | strip %}{% if bb_s != blank %}<li>{{ bb_s | escape }}</li>{% endif %}{% endfor %}</ul>
-      </details>
-    {%- endif -%}
-    {%- if bb_care != blank -%}
-      <details class="bb-info__item">
-        <summary>{% render 'bb-lucide', name: 'droplet' %}<span>{{ 'bunny_baby.product.care' | t }}</span></summary>
-        <ul class="bb-info__list">{% assign bb_ls = bb_care | split: bb_nl %}{% for bb_l in bb_ls %}{% assign bb_s = bb_l | strip %}{% if bb_s != blank %}<li>{{ bb_s | escape }}</li>{% endif %}{% endfor %}</ul>
-      </details>
-    {%- endif -%}
-    {%- if bb_safety != blank -%}
-      <details class="bb-info__item">
-        <summary>{% render 'bb-lucide', name: 'shield-check' %}<span>{{ 'bunny_baby.product.safety' | t }}</span></summary>
-        <ul class="bb-info__list">{% assign bb_ls = bb_safety | split: bb_nl %}{% for bb_l in bb_ls %}{% assign bb_s = bb_l | strip %}{% if bb_s != blank %}<li>{{ bb_s | escape }}</li>{% endif %}{% endfor %}</ul>
-      </details>
-    {%- endif -%}
-    {%- if bb_faq != blank -%}
-      {%- assign bb_lines = bb_faq | split: bb_nl -%}
-      <details class="bb-info__item">
-        <summary>{% render 'bb-lucide', name: 'message' %}<span>{{ 'bunny_baby.product.faq' | t }}</span></summary>
-        <dl class="bb-info__faq">
-          {%- assign bb_n = 0 -%}
-          {%- for bb_l in bb_lines -%}
-            {%- assign bb_s = bb_l | strip -%}
-            {%- if bb_s == blank -%}{%- continue -%}{%- endif -%}
-            {%- assign bb_odd = bb_n | modulo: 2 -%}
-            {%- if bb_odd == 0 -%}<dt>{{ bb_s | escape }}</dt>{%- else -%}<dd>{{ bb_s | escape }}</dd>{%- endif -%}
-            {%- assign bb_n = bb_n | plus: 1 -%}
-          {%- endfor -%}
-        </dl>
-      </details>
-    {%- endif -%}
+{%- if bb_box != blank -%}
+  <div class="bb-info" {{ block.shopify_attributes }}>
+    <ul>{% assign bb_ls = bb_box | split: bb_nl %}{% for bb_l in bb_ls %}{% assign bb_s = bb_l | strip %}{% if bb_s != blank %}<li>{{ bb_s | escape }}</li>{% endif %}{% endfor %}</ul>
   </div>
 {%- endif -%}
-
-{% stylesheet %}
-  .bb-info { border-top: 1px solid rgb(var(--color-foreground-rgb, 0 0 0) / 0.1); }
-  .bb-info__item { border-bottom: 1px solid rgb(var(--color-foreground-rgb, 0 0 0) / 0.1); }
-  .bb-info__item summary { display: flex; align-items: center; gap: 10px; padding: 14px 0; cursor: pointer; font-weight: 600; list-style: none; }
-  .bb-info__item summary::-webkit-details-marker { display: none; }
-  .bb-info__item summary::after { content: '+'; margin-inline-start: auto; font-weight: 400; font-size: 1.2em; }
-  .bb-info__item[open] summary::after { content: '−'; }
-  .bb-info__item summary .bb-icon { width: 20px; height: 20px; }
-  .bb-info__list { margin: 0 0 14px; padding-inline-start: 20px; display: grid; gap: 6px; }
-  .bb-info__faq { margin: 0 0 14px; }
-  .bb-info__faq dt { font-weight: 600; margin-top: 10px; }
-  .bb-info__faq dd { margin: 2px 0 0; }
-{% endstylesheet %}
 
 {% schema %}
 {
   "name": "BB product info",
   "tag": null,
   "settings": [
-    { "type": "paragraph", "content": "Reads custom.in_the_box, care, safety and faq. Empty sections are hidden." },
-    { "type": "checkbox", "id": "open_first", "label": "Open what's in the box by default", "default": true },
-    { "type": "range", "id": "padding-block-start", "label": "t:settings.top", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 },
-    { "type": "range", "id": "padding-block-end", "label": "t:settings.bottom", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 }
+    { "type": "checkbox", "id": "open_first", "label": "Open what's in the box by default", "default": true }
   ],
   "presets": [{ "name": "BB product info", "category": "t:categories.product" }]
 }
