@@ -48,6 +48,10 @@
           else
             assign bb_icon = 'tag'
         endcase
+        # A size such as "Size 1 · 0–6 months" already states the age.
+        if bb_opt.selected_value contains 'month' or bb_opt.selected_value contains 'شه'
+          assign bb_has_age = true
+        endif
         if bb_opt.selected_value != blank
           render 'bb-spec-row', icon: bb_icon, label: bb_opt.name, value: bb_opt.selected_value, raw_label: true
         endif
