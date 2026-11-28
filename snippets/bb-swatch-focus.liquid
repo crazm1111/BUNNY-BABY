@@ -1,0 +1,15 @@
+{%- doc -%}
+  Prints where photo swatches should zoom in, by product type.
+  'body' for tall products whose print sits on the lower body (bottles, cups),
+  'center' for everything else. Add a product type here to change its swatches.
+
+  @param {object} product - The product.
+{%- enddoc -%}
+{%- liquid
+  case product.type
+    when 'Baby Bottles', 'Cups & Sippy Cups'
+      echo 'body'
+    else
+      echo 'center'
+  endcase
+-%}

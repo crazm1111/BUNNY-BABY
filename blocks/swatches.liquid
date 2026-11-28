@@ -34,6 +34,7 @@
   <product-swatches
     data-product-id="{{ closest.product.id }}"
     data-product-url="{{ closest.product.url }}"
+    data-bb-focus="{% render 'bb-swatch-focus', product: closest.product %}"
     style="
       --overflow-list-alignment: {{ block_settings.product_swatches_alignment }};
       --overflow-list-alignment-mobile: {{ block_settings.product_swatches_alignment_mobile }};
