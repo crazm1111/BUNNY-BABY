@@ -1,0 +1,51 @@
+{%- doc -%}
+  Bunny Baby: bigger photo swatches so the design on a bottle or pacifier can
+  be seen. Applies only to swatches built from a variant photo (colour and
+  design options). 72 px on the product page (64 px on phones), 40–44 px on
+  product cards.
+{%- enddoc -%}
+{% stylesheet %}
+  .variant-option {
+    --bb-swatch: 72px;
+  }
+
+  @media screen and (max-width: 749px) {
+    .variant-option {
+      --bb-swatch: 64px;
+    }
+  }
+
+  product-swatches .variant-option,
+  swatches-variant-picker-component .variant-option {
+    --bb-swatch: 40px;
+  }
+
+  @media screen and (min-width: 750px) {
+    product-swatches .variant-option,
+    swatches-variant-picker-component .variant-option {
+      --bb-swatch: 44px;
+    }
+  }
+
+  .variant-option .swatch.swatch--variant-image {
+    --swatch-width: var(--bb-swatch);
+    --swatch-height: var(--bb-swatch);
+    border-radius: 12px;
+    background-color: #fff;
+    background-size: 125%;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  product-swatches .variant-option .swatch.swatch--variant-image {
+    border-radius: 8px;
+  }
+
+  .variant-option .variant-option__button-label.variant-option__button-label--has-swatch:has(.swatch--variant-image) {
+    border-radius: 14px;
+  }
+
+  product-swatches .variant-option .variant-option__button-label.variant-option__button-label--has-swatch:has(.swatch--variant-image) {
+    border-radius: 10px;
+  }
+{% endstylesheet %}

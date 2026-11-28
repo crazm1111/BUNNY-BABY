@@ -14,7 +14,8 @@
   assign swatch_value = null
   assign extra_classes = ''
   if settings.show_variant_image and variant_image
-    assign swatch_image_width = settings.variant_swatch_width | times: 2
+    # Bunny Baby: sharp enough for the larger photo swatches
+    assign swatch_image_width = 320
     assign swatch_image_url = variant_image | image_url: width: swatch_image_width
     assign swatch_value = 'url(' | append: swatch_image_url | append: ')'
     assign extra_classes = extra_classes | append: ' swatch--variant-image'
