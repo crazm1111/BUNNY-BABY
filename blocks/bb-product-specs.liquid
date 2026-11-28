@@ -1,8 +1,9 @@
 {%- doc -%}
   Specifications table. Option rows (age, colour, size…) show the selected
   variant's value and update when the shopper picks another variant.
-  Product-level rows come from metafields (material, type, features) and the
-  vendor. Age and colour metafields are used only when the product has no
+  Product-level rows come from metafields (material, type, features, bottle
+  neck, teat shape, pattern) and the vendor. Capacity, pack size and teat flow
+  are read from the selected variant first, then the product. Age and colour metafields are used only when the product has no
   age or colour option. Empty rows are left out; the block is hidden when no
   row has a value.
 {%- enddoc -%}
@@ -18,6 +19,8 @@
   assign bb_features = bb_mf.features.value | join: bb_sep
   assign bb_has_age = false
   assign bb_has_colour = false
+  assign bb_option_kinds = ''
+  assign bb_variant = bb_product.selected_or_first_available_variant
 
   capture bb_option_rows
     unless bb_product.has_only_default_variant
@@ -26,6 +29,7 @@
           render 'bb-option-kind', name: bb_opt.name
         endcapture
         assign bb_okind = bb_okind | strip
+        assign bb_option_kinds = bb_option_kinds | append: ',' | append: bb_okind
         case bb_okind
           when 'age'
             assign bb_has_age = true
@@ -59,6 +63,32 @@
   unless bb_has_colour
     assign bb_color = bb_mf.color.value | join: bb_sep
   endunless
+  # Fields that can sit on the variant (when they differ between variants) or on
+  # the product (when every variant shares them). The variant value wins.
+  # Capacity is read from the variant only: the product field holds a filter
+  # range such as "151–250 ml". A row is left out when an option of the same
+  # kind already shows the value.
+  capture bb_field_rows
+    assign bb_fields = 'capacity:droplet:capacity,pack_size:package:pack,bottle_neck:bottle-wide:,teat_shape:teat-angled:,teat_flow:flow:,pattern:sparkle:design,size:ruler:size' | split: ','
+    for bb_field in bb_fields
+      assign bb_parts = bb_field | split: ':'
+      assign bb_key = bb_parts[0]
+      assign bb_skip_kind = bb_parts[2] | default: 'none'
+      assign bb_skip_kind = ',' | append: bb_skip_kind
+      if bb_option_kinds contains bb_skip_kind
+        continue
+      endif
+      assign bb_value = bb_variant.metafields.custom[bb_key].value
+      if bb_value == blank and bb_key != 'capacity'
+        assign bb_value = bb_mf[bb_key].value
+      endif
+      if bb_value != blank
+        assign bb_label = 'bunny_baby.product.spec_' | append: bb_key
+        render 'bb-spec-row', icon: bb_parts[1], label: bb_label, value: bb_value
+      endif
+    endfor
+  endcapture
+
   assign bb_brand = ''
   if block.settings.show_brand
     assign bb_brand = bb_product.vendor
@@ -81,6 +111,7 @@
     if bb_color != blank
       render 'bb-spec-row', icon: 'palette', label: 'bunny_baby.product.spec_color', value: bb_color
     endif
+    echo bb_field_rows
     if bb_features != blank
       render 'bb-spec-row', icon: 'sparkle', label: 'bunny_baby.product.spec_features', value: bb_features
     endif
@@ -107,7 +138,7 @@
   "name": "BB specifications",
   "tag": null,
   "settings": [
-    { "type": "paragraph", "content": "Option rows follow the selected variant. Also reads custom.material, product_kind and features. Empty rows are hidden." },
+    { "type": "paragraph", "content": "Option rows follow the selected variant. Also reads custom.material, product_kind, features, bottle_neck, teat_shape and pattern. Capacity, pack size and teat flow come from the selected variant, falling back to the product. Empty rows are hidden." },
     { "type": "checkbox", "id": "show_brand", "label": "Show brand row", "default": true },
     { "type": "range", "id": "padding-block-start", "label": "t:settings.top", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 },
     { "type": "range", "id": "padding-block-end", "label": "t:settings.bottom", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 }
