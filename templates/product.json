@@ -197,7 +197,7 @@
               "type": "variant-picker",
               "settings": {
                 "variant_style": "buttons",
-                "show_swatches": false,
+                "show_swatches": true,
                 "option_label_text_color": "",
                 "variant_style_class": "default",
                 "custom_variant_background": "{{ settings.color_palette.background }}",
@@ -302,14 +302,75 @@
                 "padding-inline-end": 0
               },
               "blocks": {}
+            },
+            "bb_highlights": {
+              "type": "bb-product-highlights",
+              "settings": {
+                "show_heading": false,
+                "show_text": false,
+                "max_items": 4,
+                "padding-block-start": 4,
+                "padding-block-end": 4
+              },
+              "blocks": {}
+            },
+            "product_inventory_bb": {
+              "type": "product-inventory",
+              "settings": {
+                "inventory_threshold": 5,
+                "show_inventory_quantity": false,
+                "text_color": "",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "bb_trust": {
+              "type": "bb-trust-strip",
+              "settings": {
+                "icon_1": "truck",
+                "text_1": "bunny_baby.product.trust_delivery",
+                "icon_2": "banknote",
+                "text_2": "bunny_baby.product.trust_cod",
+                "icon_3": "badge-check",
+                "text_3": "bunny_baby.product.trust_original",
+                "padding-block-start": 0,
+                "padding-block-end": 0
+              },
+              "blocks": {}
+            },
+            "bb_specs": {
+              "type": "bb-product-specs",
+              "settings": {
+                "show_brand": true,
+                "padding-block-start": 8,
+                "padding-block-end": 0
+              },
+              "blocks": {}
+            },
+            "bb_info": {
+              "type": "bb-product-info",
+              "settings": {
+                "open_first": true,
+                "padding-block-start": 0,
+                "padding-block-end": 0
+              },
+              "blocks": {}
             }
           },
           "block_order": [
             "group_icgrde",
+            "bb_highlights",
             "divider_VJhene",
             "variant_picker_R3rGDr",
+            "product_inventory_bb",
             "buy_buttons_eYQEYi",
-            "text_aEtTtq"
+            "bb_trust",
+            "text_aEtTtq",
+            "bb_specs",
+            "bb_info"
           ]
         }
       },
@@ -331,32 +392,6 @@
     "product_recommendations_qggXJq": {
       "type": "product-recommendations",
       "blocks": {
-        "text_cbcgyb": {
-          "type": "text",
-          "name": "t:names.header",
-          "settings": {
-            "text": "<h2>You may also like </h2>",
-            "width": "fit-content",
-            "max_width": "normal",
-            "alignment": "left",
-            "type_preset": "h4",
-            "font": "var(--font-body--family)",
-            "font_size": "",
-            "line_height": "normal",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "text_color": "",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        },
         "static-product-card": {
           "type": "_product-card",
           "name": "t:names.product_card",
@@ -369,10 +404,10 @@
             "border_opacity": 100,
             "border_color": "",
             "border_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 8,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
+            "padding-block-start": 8,
+            "padding-block-end": 12,
+            "padding-inline-start": 8,
+            "padding-inline-end": 8
           },
           "blocks": {
             "product_card_gallery_DNizbJ": {
@@ -445,10 +480,20 @@
             "product_title_M7MJkb",
             "price_gLWgA6"
           ]
+        },
+        "bb_heading_rec": {
+          "type": "bb-heading",
+          "settings": {
+            "text": "bunny_baby.product.you_may_also_like",
+            "type_preset": "h4",
+            "padding-block-start": 0,
+            "padding-block-end": 0
+          },
+          "blocks": {}
         }
       },
       "block_order": [
-        "text_cbcgyb"
+        "bb_heading_rec"
       ],
       "name": "t:names.product_recommendations",
       "settings": {

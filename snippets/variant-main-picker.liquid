@@ -58,6 +58,15 @@
           assign swatch_count = product_option.values | map: 'swatch' | compact | size
           assign variant_style = block_settings.variant_style
 
+          # Bunny Baby: colour and design options show the variant photo as the swatch
+          capture bb_okind
+            render 'bb-option-kind', name: product_option.name
+          endcapture
+          assign bb_okind = bb_okind | strip
+          if bb_okind == 'colour' or bb_okind == 'design'
+            assign swatch_count = product_option.values.size
+          endif
+
           if swatch_count > 0 and block_settings.show_swatches
             if block_settings.variant_style == 'dropdown'
               assign variant_style = 'swatch_dropdown'
@@ -141,12 +150,24 @@
                     if featured_media == blank and product_option_value.product_url
                       assign featured_media = product_option_value.variant.product.featured_media
                     endif
+
+                    # Bunny Baby: no variant for this exact combination, use any variant with this value
+                    if featured_media == blank
+                      assign bb_opt_key = 'option' | append: product_option.position
+                      for bb_v in product_resource.variants
+                        if bb_v[bb_opt_key] == product_option_value.name and bb_v.featured_media
+                          assign featured_media = bb_v.featured_media
+                          break
+                        endif
+                      endfor
+                    endif
                   %}
 
                   {% render 'swatch',
                     swatch: product_option_value.swatch,
                     variant_image: featured_media,
-                    mode: 'unscaled'
+                    mode: 'unscaled',
+                    label: product_option_value.name
                   %}
                 {% else %}
                   {% if product_option_value.available == true %}

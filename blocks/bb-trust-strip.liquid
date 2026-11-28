@@ -1,0 +1,60 @@
+{%- doc -%}
+  Small row of service promises under the buy buttons. Each item is a
+  translation key or plain text; empty items are hidden.
+{%- enddoc -%}
+{%- liquid
+  assign bb_items = ''
+  for i in (1..3)
+    assign t_id = 'text_' | append: i
+    assign bb_t = block.settings[t_id] | strip
+    if bb_t != blank
+      assign bb_items = bb_items | append: 'x'
+    endif
+  endfor
+-%}
+{%- if bb_items != blank -%}
+  <ul class="bb-pdp-trust spacing-style" role="list" style="{% render 'spacing-style', settings: block.settings %}" {{ block.shopify_attributes }}>
+    {%- for i in (1..3) -%}
+      {%- assign t_id = 'text_' | append: i -%}
+      {%- assign i_id = 'icon_' | append: i -%}
+      {%- assign bb_t = block.settings[t_id] | strip -%}
+      {%- if bb_t == blank -%}{%- continue -%}{%- endif -%}
+      <li>{% render 'bb-lucide', name: block.settings[i_id] %}<span>{% render 'bb-text', text: bb_t %}</span></li>
+    {%- endfor -%}
+  </ul>
+{%- endif -%}
+
+{% stylesheet %}
+  .bb-pdp-trust {
+    list-style: none; margin: 0; padding: 12px 16px; border-radius: 14px;
+    background: #fdeef5;
+    display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 8px;
+    align-items: center; justify-items: center; text-align: center; font-size: 0.9em;
+  }
+  .bb-pdp-trust li { display: flex; align-items: center; justify-content: center; gap: 6px; }
+  .bb-pdp-trust .bb-icon { flex: 0 0 18px; width: 18px; height: 18px; color: #c2185b; }
+  @media screen and (max-width: 749px) {
+    .bb-pdp-trust { padding: 12px 8px; font-size: 0.8em; align-items: start; }
+    .bb-pdp-trust li { flex-direction: column; gap: 4px; }
+    .bb-pdp-trust .bb-icon { width: 20px; height: 20px; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "BB trust strip",
+  "tag": null,
+  "settings": [
+    { "type": "paragraph", "content": "Text can be a translation key starting with bunny_baby. so it shows in Arabic on the Arabic store." },
+    { "type": "select", "id": "icon_1", "label": "Icon 1", "default": "truck", "options": [{ "value": "truck", "label": "Truck" }, { "value": "banknote", "label": "Cash" }, { "value": "badge-check", "label": "Badge" }, { "value": "message", "label": "Chat" }, { "value": "shield-check", "label": "Shield" }, { "value": "gift", "label": "Gift" }] },
+    { "type": "text", "id": "text_1", "label": "Text 1", "default": "bunny_baby.product.trust_delivery" },
+    { "type": "select", "id": "icon_2", "label": "Icon 2", "default": "banknote", "options": [{ "value": "truck", "label": "Truck" }, { "value": "banknote", "label": "Cash" }, { "value": "badge-check", "label": "Badge" }, { "value": "message", "label": "Chat" }, { "value": "shield-check", "label": "Shield" }, { "value": "gift", "label": "Gift" }] },
+    { "type": "text", "id": "text_2", "label": "Text 2", "default": "bunny_baby.product.trust_cod" },
+    { "type": "select", "id": "icon_3", "label": "Icon 3", "default": "badge-check", "options": [{ "value": "truck", "label": "Truck" }, { "value": "banknote", "label": "Cash" }, { "value": "badge-check", "label": "Badge" }, { "value": "message", "label": "Chat" }, { "value": "shield-check", "label": "Shield" }, { "value": "gift", "label": "Gift" }] },
+    { "type": "text", "id": "text_3", "label": "Text 3", "default": "bunny_baby.product.trust_original" },
+    { "type": "range", "id": "padding-block-start", "label": "t:settings.top", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 },
+    { "type": "range", "id": "padding-block-end", "label": "t:settings.bottom", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 }
+  ],
+  "presets": [{ "name": "BB trust strip", "category": "t:categories.product" }]
+}
+{% endschema %}

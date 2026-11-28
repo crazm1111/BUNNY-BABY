@@ -1,0 +1,26 @@
+{%- doc -%}
+  Prints the kind of a product option from its name, in English or Arabic:
+  colour, design, age, capacity, size, pack, or other.
+  Colour and design options show variant photos as swatches.
+
+  @param {string} name - The option name as the shopper sees it.
+{%- enddoc -%}
+{%- liquid
+  assign bb_n = name | downcase | strip
+  case bb_n
+    when 'color', 'colour', 'اللون', 'لون', 'colors', 'colours'
+      echo 'colour'
+    when 'design', 'pattern', 'التصميم', 'تصميم', 'الشكل'
+      echo 'design'
+    when 'age', 'السن', 'العمر'
+      echo 'age'
+    when 'capacity', 'volume', 'السعة'
+      echo 'capacity'
+    when 'size', 'المقاس', 'الحجم'
+      echo 'size'
+    when 'pack', 'العبوة'
+      echo 'pack'
+    else
+      echo 'other'
+  endcase
+-%}

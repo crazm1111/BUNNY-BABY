@@ -101,6 +101,16 @@
     {%- for product_option in product_resource.options_with_values -%}
       {%- liquid
         assign swatch_count = product_option.values | map: 'swatch' | compact | size
+        # Bunny Baby: colour and design options use variant photos
+        capture bb_okind
+          render 'bb-option-kind', name: product_option.name
+        endcapture
+        assign bb_okind = bb_okind | strip
+        if bb_okind == 'colour' or bb_okind == 'design'
+          if product_option.values.size > 1
+            assign swatch_count = product_option.values.size
+          endif
+        endif
       -%}
 
       {% if swatch_count == 0 %}
@@ -172,6 +182,16 @@
               if featured_media == blank
                 assign featured_media = fallback_featured_media
               endif
+
+              # Bunny Baby: colours that can't be ordered still show their photo
+              if featured_media == blank
+                for variant in product_resource.variants
+                  if variant[swatch_option_key] == product_option_value.name and variant.featured_media
+                    assign featured_media = variant.featured_media
+                    break
+                  endif
+                endfor
+              endif
             %}
 
             <li class="variant-option__swatch">
@@ -202,6 +222,7 @@
                 {% render 'swatch',
                   swatch: product_option_value.swatch,
                   variant_image: featured_media,
+                  label: product_option_value.name
                 %}
                 {% render 'strikethrough-variant', product_option: product_option_value %}
               </label>

@@ -1,0 +1,117 @@
+{%- doc -%}
+  Specifications table. Option rows (age, colour, size…) show the selected
+  variant's value and update when the shopper picks another variant.
+  Product-level rows come from metafields (material, type, features) and the
+  vendor. Age and colour metafields are used only when the product has no
+  age or colour option. Empty rows are left out; the block is hidden when no
+  row has a value.
+{%- enddoc -%}
+{%- liquid
+  assign bb_product = closest.product
+  assign bb_mf = bb_product.metafields.custom
+  assign bb_sep = ', '
+  if request.locale.iso_code == 'ar'
+    assign bb_sep = '، '
+  endif
+  assign bb_material = bb_mf.material.value | join: bb_sep
+  assign bb_kind = bb_mf.product_kind.value | join: bb_sep
+  assign bb_features = bb_mf.features.value | join: bb_sep
+  assign bb_has_age = false
+  assign bb_has_colour = false
+
+  capture bb_option_rows
+    unless bb_product.has_only_default_variant
+      for bb_opt in bb_product.options_with_values
+        capture bb_okind
+          render 'bb-option-kind', name: bb_opt.name
+        endcapture
+        assign bb_okind = bb_okind | strip
+        case bb_okind
+          when 'age'
+            assign bb_has_age = true
+            assign bb_icon = 'baby'
+          when 'colour'
+            assign bb_has_colour = true
+            assign bb_icon = 'palette'
+          when 'design'
+            assign bb_icon = 'sparkle'
+          when 'capacity'
+            assign bb_icon = 'droplet'
+          when 'size'
+            assign bb_icon = 'ruler'
+          when 'pack'
+            assign bb_icon = 'package'
+          else
+            assign bb_icon = 'tag'
+        endcase
+        if bb_opt.selected_value != blank
+          render 'bb-spec-row', icon: bb_icon, label: bb_opt.name, value: bb_opt.selected_value, raw_label: true
+        endif
+      endfor
+    endunless
+  endcapture
+
+  assign bb_age = ''
+  assign bb_color = ''
+  unless bb_has_age
+    assign bb_age = bb_mf.age.value | join: bb_sep
+  endunless
+  unless bb_has_colour
+    assign bb_color = bb_mf.color.value | join: bb_sep
+  endunless
+  assign bb_brand = ''
+  if block.settings.show_brand
+    assign bb_brand = bb_product.vendor
+  endif
+
+  capture bb_rows
+    if bb_brand != blank
+      render 'bb-spec-row', icon: 'badge-check', label: 'bunny_baby.product.spec_brand', value: bb_brand
+    endif
+    if bb_kind != blank
+      render 'bb-spec-row', icon: 'tag', label: 'bunny_baby.product.spec_type', value: bb_kind
+    endif
+    echo bb_option_rows
+    if bb_age != blank
+      render 'bb-spec-row', icon: 'baby', label: 'bunny_baby.product.spec_age', value: bb_age
+    endif
+    if bb_material != blank
+      render 'bb-spec-row', icon: 'layers', label: 'bunny_baby.product.spec_material', value: bb_material
+    endif
+    if bb_color != blank
+      render 'bb-spec-row', icon: 'palette', label: 'bunny_baby.product.spec_color', value: bb_color
+    endif
+    if bb_features != blank
+      render 'bb-spec-row', icon: 'sparkle', label: 'bunny_baby.product.spec_features', value: bb_features
+    endif
+  endcapture
+-%}
+{%- if bb_rows != blank -%}
+  <script src="{{ 'bb-variant-sync.js' | asset_url }}" type="module"></script>
+  <bb-variant-sync data-sync-id="specs-{{ block.id }}" class="bb-specs spacing-style" style="display:block; {% render 'spacing-style', settings: block.settings %}" {{ block.shopify_attributes }}>
+    <h2 class="bb-pdp-heading">{{ 'bunny_baby.product.specs_heading' | t }}</h2>
+    <dl class="bb-specs__list">{{ bb_rows }}</dl>
+  </bb-variant-sync>
+{%- endif -%}
+
+{% stylesheet %}
+  .bb-specs__list { margin: 0; display: grid; border-top: 1px solid rgb(var(--color-foreground-rgb, 0 0 0) / 0.1); }
+  .bb-specs__row { display: grid; grid-template-columns: 24px minmax(90px, 35%) 1fr; gap: 10px; align-items: center; padding: 10px 0; border-bottom: 1px solid rgb(var(--color-foreground-rgb, 0 0 0) / 0.1); }
+  .bb-specs__row .bb-icon { width: 18px; height: 18px; opacity: 0.7; }
+  .bb-specs__row dt { font-weight: 600; margin: 0; }
+  .bb-specs__row dd { margin: 0; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "BB specifications",
+  "tag": null,
+  "settings": [
+    { "type": "paragraph", "content": "Option rows follow the selected variant. Also reads custom.material, product_kind and features. Empty rows are hidden." },
+    { "type": "checkbox", "id": "show_brand", "label": "Show brand row", "default": true },
+    { "type": "range", "id": "padding-block-start", "label": "t:settings.top", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 },
+    { "type": "range", "id": "padding-block-end", "label": "t:settings.bottom", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 }
+  ],
+  "presets": [{ "name": "BB specifications", "category": "t:categories.product" }]
+}
+{% endschema %}

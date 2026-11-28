@@ -6,6 +6,16 @@
     if swatch_count > 0
       assign product_has_swatches = true
     endif
+    # Bunny Baby: colour and design options show variant photos on the card
+    capture bb_okind
+      render 'bb-option-kind', name: product_option.name
+    endcapture
+    assign bb_okind = bb_okind | strip
+    if bb_okind == 'colour' or bb_okind == 'design'
+      if product_option.values.size > 1
+        assign product_has_swatches = true
+      endif
+    endif
   endfor
 -%}
 
